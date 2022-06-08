@@ -14,6 +14,8 @@
 		2CA75B7728514BEE00065454 /* FullertonEatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B7628514BEE00065454 /* FullertonEatsTests.swift */; };
 		2CA75B8128514BEE00065454 /* FullertonEatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B8028514BEE00065454 /* FullertonEatsUITests.swift */; };
 		2CA75B8328514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */; };
+		2CA75B9028514C2300065454 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B8F28514C2300065454 /* .gitignore */; };
+		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		2CA75B7C28514BEE00065454 /* FullertonEatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FullertonEatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA75B8028514BEE00065454 /* FullertonEatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsUITests.swift; sourceTree = "<group>"; };
 		2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2CA75B8F28514C2300065454 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 		2CA75B5928514BEA00065454 = {
 			isa = PBXGroup;
 			children = (
+				2CA75B9128514DB600065454 /* .gitattributes */,
+				2CA75B8F28514C2300065454 /* .gitignore */,
 				2CA75B6428514BEA00065454 /* FullertonEats */,
 				2CA75B7528514BEE00065454 /* FullertonEatsTests */,
 				2CA75B7F28514BEE00065454 /* FullertonEatsUITests */,
@@ -232,7 +238,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA75B6D28514BEE00065454 /* Preview Assets.xcassets in Resources */,
+				2CA75B9028514C2300065454 /* .gitignore in Resources */,
 				2CA75B6A28514BEE00065454 /* Assets.xcassets in Resources */,
+				2CA75B9228514DB600065454 /* .gitattributes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
