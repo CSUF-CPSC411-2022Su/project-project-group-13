@@ -5,43 +5,34 @@
 //  Created by Eric Chu on 6/11/22.
 //
 
-import SwiftUI
+import Foundation
 
 struct Service {
     var label: String
     var desc: String
     var address: String
-    var date: DateComponents
-    var time: DateComponents
-    
-    // with description
-    init(label: String, desc: String, address: String, date: DateComponents, time: DateComponents) {
-        self.label = label
-        self.desc = desc
-        self.address = address
-        self.date = date
-        self.time = time
-    }
-    
-    // no description
-    init(label: String, address: String, date: DateComponents, time: DateComponents) {
-        self.label = label
-        self.desc = ""
-        self.address = address
-        self.date = date
-        self.time = time
-    }
-
+    var date: String
+    var time: String
 }
 
-class Services {
-    
-    var myServices: [Service] = []
-    
-    init() {}
-    
-    func addService(service: Service) {
-        myServices.append(service)
+extension Service: Hashable {
+    static func == (lhs: Service, rhs: Service) -> Bool {
+        return lhs.label == rhs.label && lhs.desc == rhs.desc
+        && lhs.address == rhs.address && lhs.date == rhs.date
+        && lhs.time == rhs.time
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(label)
+        hasher.combine(desc)
+        hasher.combine(address)
+        hasher.combine(date)
+        hasher.combine(time)
+    }
+}
+
+
+struct ServiceManager {
+    
+    private(set) var serviceList: [Service] = []
 }
