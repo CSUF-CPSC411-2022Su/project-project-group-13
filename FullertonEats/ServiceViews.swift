@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ServiceView: View {
-    @StateObject var manager = ServiceManager()
+    @StateObject var user = User(username:  "user", password: "pw")
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(Array(self.manager.serviceList.enumerated()), id: \.1) { index, service in
+                ForEach(Array(self.user.myServices.enumerated()), id: \.1) { index, service in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(service.label)
@@ -43,7 +43,7 @@ struct ServiceView: View {
                 }
             }
 
-        }.environmentObject(manager)
+        }.environmentObject(user)
     }
     
     var addButton: some View {
@@ -58,16 +58,16 @@ struct ServiceView: View {
     }
     
     func delete(indexSet: IndexSet) {
-        manager.serviceList.remove(atOffsets: indexSet)
+        user.myServices.remove(atOffsets: indexSet)
     }
     
     func move(indices: IndexSet, newOffset: Int) {
-        manager.serviceList.move(fromOffsets: indices, toOffset: newOffset)
+        user.myServices.move(fromOffsets: indices, toOffset: newOffset)
     }
 }
 
 struct AddServiceForm: View {
-    @EnvironmentObject var manager: ServiceManager
+    @EnvironmentObject var user: User
     @State var label: String = ""
     @State var desc: String = ""
     @State var address: String = ""
@@ -149,7 +149,7 @@ struct AddServiceForm: View {
             if !label.isEmpty, !address.isEmpty {
                 let newService = Service(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
 
-                manager.serviceList.append(newService)
+                user.myServices.append(newService)
             } else {
                 // TODO: -> popup error message
                 print("error")
@@ -162,7 +162,7 @@ struct AddServiceForm: View {
 }
 
 struct EditServiceForm: View {
-    @EnvironmentObject var manager: ServiceManager
+    @EnvironmentObject var user: User
     @State var label: String = ""
     @State var desc: String = ""
     @State var address: String = ""
@@ -210,7 +210,7 @@ struct EditServiceForm: View {
         Section(header: Text("Label").modifier(HeaderModifier())) {
             TextField("", text: $label)
                 .onAppear {
-                    self.label = manager.serviceList[index].label
+                    self.label = user.myServices[index].label
                 }
         }
     }
@@ -219,7 +219,7 @@ struct EditServiceForm: View {
         Section(header: Text("Description").modifier(HeaderModifier())) {
             TextField("", text: $desc)
                 .onAppear {
-                    self.desc = manager.serviceList[index].desc
+                    self.desc = user.myServices[index].desc
                 }
         }
     }
@@ -228,7 +228,7 @@ struct EditServiceForm: View {
         Section(header: Text("Address").modifier(HeaderModifier())) {
             TextField("", text: $address)
                 .onAppear {
-                    self.address = manager.serviceList[index].address
+                    self.address = user.myServices[index].address
                 }
         }
     }
@@ -239,7 +239,7 @@ struct EditServiceForm: View {
                 .labelsHidden()
                 .datePickerStyle(WheelDatePickerStyle())
                 .onAppear {
-                    self.date = manager.serviceList[index].date
+                    self.date = user.myServices[index].date
                 }
         }
     }
@@ -249,19 +249,19 @@ struct EditServiceForm: View {
             .modifier(HeaderModifier())) {
                 DatePicker("Start", selection: $startTime, displayedComponents: .hourAndMinute)
                     .onAppear {
-                        self.startTime = manager.serviceList[index].startTime
+                        self.startTime = user.myServices[index].startTime
                     }
 
                 DatePicker("End", selection: $endTime, displayedComponents: .hourAndMinute)
                     .onAppear {
-                        self.endTime = manager.serviceList[index].endTime
+                        self.endTime = user.myServices[index].endTime
                     }
             }
     }
     
     var doneButton: some View {
         Button(action: {
-            manager.serviceList[0].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
+            user.myServices[index].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
         }) {
             Text("Done").modifier(ButtonModifier())
         }

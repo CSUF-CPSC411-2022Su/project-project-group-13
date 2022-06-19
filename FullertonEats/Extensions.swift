@@ -36,3 +36,9 @@ extension Service: Hashable {
         hasher.combine(endTime)
     }
 }
+
+extension Date {
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+}

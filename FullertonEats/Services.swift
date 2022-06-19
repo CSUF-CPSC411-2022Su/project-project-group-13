@@ -33,9 +33,3 @@ struct Service {
         self.endTime = date
     }
 }
-
-class ServiceManager: ObservableObject {
-    @Published var serviceList: [Service] = []
-
-    init() {}
-}
