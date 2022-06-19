@@ -11,28 +11,31 @@ struct Service {
     var label: String
     var desc: String
     var address: String
-    var date: String
-    var time: String
-}
+    var date: Date
+    var startTime: Date
+    var endTime: Date
 
-extension Service: Hashable {
-    static func == (lhs: Service, rhs: Service) -> Bool {
-        return lhs.label == rhs.label && lhs.desc == rhs.desc
-        && lhs.address == rhs.address && lhs.date == rhs.date
-        && lhs.time == rhs.time
+    init(label: String, desc: String, address: String, date: Date, startTime: Date, endTime: Date) {
+        self.label = label
+        self.desc = desc
+        self.address = address
+        self.date = date
+        self.startTime = date
+        self.endTime = date
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(label)
-        hasher.combine(desc)
-        hasher.combine(address)
-        hasher.combine(date)
-        hasher.combine(time)
+    mutating func update(label: String, desc: String, address: String, date: Date, startTime: Date, endTime: Date) {
+        self.label = label
+        self.desc = desc
+        self.address = address
+        self.date = date
+        self.startTime = date
+        self.endTime = date
     }
 }
 
+class ServiceManager: ObservableObject {
+    @Published var serviceList: [Service] = []
 
-struct ServiceManager {
-    
-    private(set) var serviceList: [Service] = []
+    init() {}
 }
