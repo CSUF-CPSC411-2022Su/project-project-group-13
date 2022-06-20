@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C165A1A285C324C00A2A062 /* ServiceViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C165A19285C324B00A2A062 /* ServiceViews.swift */; };
+		2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C165A1B285C3C3100A2A062 /* Modifiers.swift */; };
+		2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1EF29A285D84FE00235CDA /* Extensions.swift */; };
 		2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */; };
 		2CA75B6828514BEA00065454 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B6728514BEA00065454 /* ContentView.swift */; };
 		2CA75B6A28514BEE00065454 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B6928514BEE00065454 /* Assets.xcassets */; };
@@ -17,6 +20,8 @@
 		2CA75B9028514C2300065454 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B8F28514C2300065454 /* .gitignore */; };
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
 		7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B8F86285EAD3500121759 /* LoginScreenView.swift */; };
+		2CF0D2A7285484900018F602 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Services.swift */; };
+		2CFD6E83285EC0B9006688A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6E82285EC0B9006688A1 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C165A19285C324B00A2A062 /* ServiceViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViews.swift; sourceTree = "<group>"; };
+		2C165A1B285C3C3100A2A062 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		2C1EF29A285D84FE00235CDA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2CA75B6228514BEA00065454 /* FullertonEats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullertonEats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsApp.swift; sourceTree = "<group>"; };
 		2CA75B6728514BEA00065454 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +58,8 @@
 		2CA75B8F28514C2300065454 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		7A9B8F86285EAD3500121759 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
+		2CF0D2A6285484900018F602 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		2CFD6E82285EC0B9006688A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +112,14 @@
 		2CA75B6428514BEA00065454 /* FullertonEats */ = {
 			isa = PBXGroup;
 			children = (
+				2CF0D2A6285484900018F602 /* Services.swift */,
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				2CA75B6728514BEA00065454 /* ContentView.swift */,
 				7A9B8F86285EAD3500121759 /* LoginScreenView.swift */,
+				2C165A19285C324B00A2A062 /* ServiceViews.swift */,
+				2C165A1B285C3C3100A2A062 /* Modifiers.swift */,
+				2C1EF29A285D84FE00235CDA /* Extensions.swift */,
+				2CFD6E82285EC0B9006688A1 /* User.swift */,
 				2CA75B6928514BEE00065454 /* Assets.xcassets */,
 				2CA75B6B28514BEE00065454 /* Preview Content */,
 			);
@@ -269,8 +284,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */,
+				2C165A1A285C324C00A2A062 /* ServiceViews.swift in Sources */,
+				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
+				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
 				2CA75B6828514BEA00065454 /* ContentView.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Services.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
+				2CFD6E83285EC0B9006688A1 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
