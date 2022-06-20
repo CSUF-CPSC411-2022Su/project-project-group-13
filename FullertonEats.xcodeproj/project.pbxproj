@@ -16,9 +16,7 @@
 		2CA75B8328514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */; };
 		2CA75B9028514C2300065454 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B8F28514C2300065454 /* .gitignore */; };
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
-		7A90ECC1285822E100B2A120 /* user_info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A90ECC0285822E100B2A120 /* user_info.swift */; };
 		7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B8F86285EAD3500121759 /* LoginScreenView.swift */; };
-		7A9E55DD285152AA00EA78EB /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9E55DC285152AA00EA78EB /* Intersection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +49,7 @@
 		2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2CA75B8F28514C2300065454 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
-		7A90ECC0285822E100B2A120 /* user_info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user_info.swift; sourceTree = "<group>"; };
 		7A9B8F86285EAD3500121759 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
-		7A9E55DC285152AA00EA78EB /* Intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,10 +105,8 @@
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				2CA75B6728514BEA00065454 /* ContentView.swift */,
 				7A9B8F86285EAD3500121759 /* LoginScreenView.swift */,
-				7A90ECC0285822E100B2A120 /* user_info.swift */,
 				2CA75B6928514BEE00065454 /* Assets.xcassets */,
 				2CA75B6B28514BEE00065454 /* Preview Content */,
-				7A9E55DC285152AA00EA78EB /* Intersection.swift */,
 			);
 			path = FullertonEats;
 			sourceTree = "<group>";
@@ -275,8 +269,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */,
-				7A90ECC1285822E100B2A120 /* user_info.swift in Sources */,
-				7A9E55DD285152AA00EA78EB /* Intersection.swift in Sources */,
 				2CA75B6828514BEA00065454 /* ContentView.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
 			);
