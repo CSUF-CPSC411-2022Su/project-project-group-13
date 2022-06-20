@@ -15,7 +15,7 @@ struct LoginScreenView: View {
     var body: some View {
         NavigationView{
             ZStack{
-                Color.red
+                Color.blue
                     .ignoresSafeArea()
                 Circle()
                     .scale(1.7)
@@ -59,6 +59,8 @@ struct LoginScreenView: View {
 
 struct LoginScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            LoginScreenView()
+        }
     }
 }
