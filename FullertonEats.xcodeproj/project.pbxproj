@@ -19,9 +19,9 @@
 		2CA75B8328514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */; };
 		2CA75B9028514C2300065454 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B8F28514C2300065454 /* .gitignore */; };
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
-		7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B8F86285EAD3500121759 /* LoginScreenView.swift */; };
 		2CF0D2A7285484900018F602 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Services.swift */; };
 		2CFD6E83285EC0B9006688A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6E82285EC0B9006688A1 /* User.swift */; };
+		7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B8F86285EAD3500121759 /* LoginScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,9 +57,9 @@
 		2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2CA75B8F28514C2300065454 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
-		7A9B8F86285EAD3500121759 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		2CF0D2A6285484900018F602 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		2CFD6E82285EC0B9006688A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7A9B8F86285EAD3500121759 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

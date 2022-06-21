@@ -11,6 +11,9 @@ import SwiftUI
 struct LoginScreenView: View {
     @State private var username = ""
     @State private var password = ""
+    @State private var wrongUsername: Float = 0
+    @State private var wrongPassword: Float = 0
+    @State private var showingLoginScreen = false
     
     var body: some View {
         NavigationView{
@@ -38,23 +41,44 @@ struct LoginScreenView: View {
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
+                        .border(.red, width: CGFloat(wrongUsername))
                     TextField("Password", text: $password)
                         .padding()
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                    Button("login"){
-                        //authenticate user if they have an account set up
+                        .border(.red, width: CGFloat(wrongPassword))
+                    
+                    NavigationLink(destination: ServiceView()) {
+                        Button("login"){
+                            
+                        }
+                        .foregroundColor(.white)
+                        .frame(width: 300, height: 50)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                    
+                        
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 300, height: 50)
-                    .background(Color.blue)
-                    .cornerRadius(10)
                 }
             }
             .navigationBarHidden(true)
         }
     }
+    
+    func authenticateUser(username: String, password: String) {
+        if username == "Freddy" {
+            wrongUsername = 0
+            if password=="fullerton" {
+                wrongPassword = 0
+                showingLoginScreen = true
+            }
+            else {
+                wrongPassword = 2
+                wrongUsername = 2
+        }
+    }
+}
 }
 
 struct LoginScreenView_Previews: PreviewProvider {
