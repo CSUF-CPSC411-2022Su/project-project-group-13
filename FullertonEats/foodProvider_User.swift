@@ -7,7 +7,7 @@
 import SwiftUI
 import Foundation
 
-struct foodProvider_user: View {
+struct firstView: View {  //firstView  foodProvider_user
     
     var body: some View {
         
@@ -28,23 +28,17 @@ struct foodProvider_user: View {
                         .stroke(.orange, lineWidth: 2)
                 )
             
-            
             Label("Search", systemImage: "magnifyingglass.circle.fill")
                 .imageScale(.large)
                 .font(.headline)
                 .foregroundColor(Color(red: 0.8823529411764706, green: 0.4392156862745098, blue: 0.0))
                 .multilineTextAlignment(.leading)
-            
         }
-        
         .padding(.all, 25.0)
         .shadow(color: .orange, radius: 30, x: -10, y: -10)
         .frame(height: 200.0)
         .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 0.661, saturation: 0.064, brightness: 0.763, opacity: 0.12)/*@END_MENU_TOKEN@*/)
         .cornerRadius(/*@START_MENU_TOKEN@*/30.0/*@END_MENU_TOKEN@*/)
         .offset(y:-100)
-        
-        // second Vstack
     }
-    
 }

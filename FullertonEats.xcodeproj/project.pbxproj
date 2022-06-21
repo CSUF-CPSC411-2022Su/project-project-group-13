@@ -17,6 +17,7 @@
 		2CA75B9028514C2300065454 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B8F28514C2300065454 /* .gitignore */; };
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
 		7A480783286170D5007351BC /* mapAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A480782286170D5007351BC /* mapAPI.swift */; };
+		7A48078528618EDC007351BC /* mapAPI_bad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48078428618EDC007351BC /* mapAPI_bad.swift */; };
 		7AF069782851528D00CA883D /* foodProvider_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF069772851528D00CA883D /* foodProvider_User.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		2CA75B8F28514C2300065454 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		7A480782286170D5007351BC /* mapAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAPI.swift; sourceTree = "<group>"; };
+		7A48078428618EDC007351BC /* mapAPI_bad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAPI_bad.swift; sourceTree = "<group>"; };
 		7AF069772851528D00CA883D /* foodProvider_User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodProvider_User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				2CA75B6B28514BEE00065454 /* Preview Content */,
 				7AF069772851528D00CA883D /* foodProvider_User.swift */,
 				7A480782286170D5007351BC /* mapAPI.swift */,
+				7A48078428618EDC007351BC /* mapAPI_bad.swift */,
 			);
 			path = FullertonEats;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			files = (
 				2CA75B6828514BEA00065454 /* ContentView.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
+				7A48078528618EDC007351BC /* mapAPI_bad.swift in Sources */,
 				7AF069782851528D00CA883D /* foodProvider_User.swift in Sources */,
 				7A480783286170D5007351BC /* mapAPI.swift in Sources */,
 			);
