@@ -27,8 +27,14 @@ struct ServiceView: View {
                         }
                     }
                 }
-                .onDelete(perform: delete)
-                .onMove(perform: move)
+                .onDelete {
+                    offset in
+                    user.myServices.remove(atOffsets: offset)
+                }
+                .onMove {
+                    offset, index in
+                    user.myServices.move(fromOffsets: offset, toOffset: index)
+                }
             }
             .navigationTitle("Back")
             .navigationBarTitleDisplayMode(.inline)
@@ -55,14 +61,6 @@ struct ServiceView: View {
     
     var editButton: some View {
         EditButton().modifier(ButtonModifier())
-    }
-    
-    func delete(indexSet: IndexSet) {
-        user.myServices.remove(atOffsets: indexSet)
-    }
-    
-    func move(indices: IndexSet, newOffset: Int) {
-        user.myServices.move(fromOffsets: indices, toOffset: newOffset)
     }
 }
 

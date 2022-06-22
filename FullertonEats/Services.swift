@@ -5,9 +5,9 @@
 //  Created by Eric Chu on 6/11/22.
 //
 
-import Foundation
+import SwiftUI
 
-struct Service {
+struct Service: Codable {
     var label: String
     var desc: String
     var address: String
