@@ -48,12 +48,14 @@ struct ContentView: View {
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
+                    NavigationLink(destination: SavedEvents()){ // Reroute this to login page after displaying "Account Created"
                     Button("signup"){
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
+                    }
                 }
             }
             .navigationBarHidden(true)
