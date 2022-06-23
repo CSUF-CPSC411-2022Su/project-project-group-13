@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ServiceView: View {
-    @StateObject var user = User(username:  "user", password: "pw")
+    @StateObject var user = User(username: "user", password: "pw")
+    
+    @State var showingAddServiceSheet = false
+    @State var showingEditServiceSheet = false
 
     var body: some View {
         NavigationView {
@@ -22,9 +25,13 @@ struct ServiceView: View {
                                 .font(.subheadline)
                                 .fontWeight(.light)
                         }
-                        NavigationLink(destination: EditServiceForm(index: index)) {
-                            Text("")
-                        }
+                        
+                        Spacer()
+                        
+                        editServiceButton
+                            .sheet(isPresented: $showingEditServiceSheet) {
+                                EditServiceSheet(index: index)
+                            }
                     }
                 }
                 .onDelete {
@@ -36,15 +43,16 @@ struct ServiceView: View {
                     user.myServices.move(fromOffsets: offset, toOffset: index)
                 }
             }
-            .navigationTitle("Back")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    addButton
+                }
+                
                 ToolbarItem(placement: .principal) {
                     Text("My Services").bold()
                 }
                 
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    addButton
+                ToolbarItem(placement: .navigationBarTrailing) {
                     editButton
                 }
             }
@@ -53,18 +61,29 @@ struct ServiceView: View {
     }
     
     var addButton: some View {
-        NavigationLink(destination: AddServiceForm()) {
-            Text("Add")
-                .modifier(ButtonModifier())
+        Button("Add") {
+            showingAddServiceSheet.toggle()
         }
+        .sheet(isPresented: $showingAddServiceSheet) {
+            AddServiceSheet()
+        }
+        .modifier(ButtonModifier())
     }
     
     var editButton: some View {
         EditButton().modifier(ButtonModifier())
     }
+    
+    var editServiceButton: some View {
+        Button(action: {
+            showingEditServiceSheet.toggle()
+        }) {
+            Image(systemName: "info.circle")
+        }
+    }
 }
 
-struct AddServiceForm: View {
+struct AddServiceSheet: View {
     @EnvironmentObject var user: User
     @State var label: String = ""
     @State var desc: String = ""
@@ -72,9 +91,24 @@ struct AddServiceForm: View {
     @State var date: Date = .init()
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
+    
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        NavigationView {
+        VStack {
+            HStack {
+                Button("Cancel") {
+                    dismiss()
+                }
+                .modifier(ButtonModifier())
+                .padding(.leading)
+                
+                Spacer()
+                
+                saveButton
+                    .padding(.trailing)
+            }.padding(.vertical, 10)
+            
             List {
                 labelSection
                 descSection
@@ -83,23 +117,6 @@ struct AddServiceForm: View {
                 timeSection
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Back")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: ServiceView()) {
-                        Text("Cancel").modifier(ButtonModifier())
-                    }
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text("Add").bold()
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    saveButton
-                }
-            }
         }
     }
     
@@ -148,6 +165,7 @@ struct AddServiceForm: View {
                 let newService = Service(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
 
                 user.myServices.append(newService)
+                dismiss()
             } else {
                 // TODO: -> popup error message
                 print("error")
@@ -159,7 +177,7 @@ struct AddServiceForm: View {
     }
 }
 
-struct EditServiceForm: View {
+struct EditServiceSheet: View {
     @EnvironmentObject var user: User
     @State var label: String = ""
     @State var desc: String = ""
@@ -168,6 +186,8 @@ struct EditServiceForm: View {
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
     
+    @Environment(\.dismiss) var dismiss
+    
     var index: Int
     
     init(index: Int) {
@@ -175,7 +195,20 @@ struct EditServiceForm: View {
     }
 
     var body: some View {
-        NavigationView {
+        VStack {
+            HStack {
+                Button("Cancel") {
+                    dismiss()
+                }
+                .modifier(ButtonModifier())
+                .padding(.leading)
+                
+                Spacer()
+                
+                doneButton
+                    .padding(.trailing)
+            }.padding(.vertical, 10)
+            
             List {
                 labelSection
                 descSection
@@ -184,23 +217,6 @@ struct EditServiceForm: View {
                 timeSection
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Back")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: ServiceView()) {
-                        Text("Cancel").modifier(ButtonModifier())
-                    }
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text("Edit").bold()
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    doneButton
-                }
-            }
         }
     }
     
@@ -260,6 +276,8 @@ struct EditServiceForm: View {
     var doneButton: some View {
         Button(action: {
             user.myServices[index].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
+            
+            dismiss()
         }) {
             Text("Done").modifier(ButtonModifier())
         }

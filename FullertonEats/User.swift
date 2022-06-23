@@ -8,6 +8,11 @@
 import SwiftUI
 
 class User: ObservableObject, Codable {
+    
+    enum CodingKeys: CodingKey {
+        case username, password, favoritedServices, myServices
+    }
+    
     var username: String
     var password: String
     @Published var favoritedServices: [Service] = []
@@ -19,12 +24,26 @@ class User: ObservableObject, Codable {
     }
     
     required init(from decoder: Decoder) throws {
-        <#code#>
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        username = try container.decode(String.self, forKey: .username)
+        password = try container.decode(String.self, forKey: .password)
+        favoritedServices = try container.decode([Service].self, forKey: .favoritedServices)
+        myServices = try container.decode([Service].self, forKey: .myServices)
     }
     
     init(username: String, password: String) {
         self.username = username
         self.password = password
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(username, forKey: .username)
+        try container.encode(password, forKey: .password)
+        try container.encode(favoritedServices, forKey: .favoritedServices)
+        try container.encode(myServices, forKey: .myServices)
     }
     
     // returns the index of the upcoming service from favoritedServices
@@ -69,16 +88,24 @@ struct UserLoader {
     var userInfoURL: URL
     
     init() {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory,
-                                                         in: .userDomainMask).first!
-        
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         userInfoURL = documentDirectory.appendingPathComponent("userInfo").appendingPathExtension("plist")
     }
     
+    // call this function on successful login
     func loadUser() -> User? {
         let propertyListDecoder = PropertyListDecoder()
         if let retrieveUser = try? Data(contentsOf: userInfoURL), let decodedUser = try? propertyListDecoder.decode(User.self, from: retrieveUser) {
             return decodedUser
+        }
+        return nil
+    }
+    
+    // call this function on user signup and service manipulation
+    func saveUser(user: User) {
+        let propertyListEncoder = PropertyListEncoder()
+        if let encodedUser = try? propertyListEncoder.encode(user) {
+            try? encodedUser.write(to: userInfoURL, options: .noFileProtection)
         }
     }
 }
