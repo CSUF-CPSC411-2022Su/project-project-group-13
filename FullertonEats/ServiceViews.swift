@@ -12,23 +12,36 @@ struct ServiceView: View {
     
     @State var showingAddServiceSheet = false
     @State var showingEditServiceSheet = false
+    @State var showingInfoSheet = false
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(Array(self.user.myServices.enumerated()), id: \.1) { index, service in
                     HStack {
-                        VStack(alignment: .leading) {
-                            Text(service.label)
-                            
-                            Text(service.address)
-                                .font(.subheadline)
-                                .fontWeight(.light)
+                        Button(action: {
+                            showingInfoSheet.toggle()
+                        }) {
+                            VStack(alignment: .leading) {
+                                Text(service.label)
+                                    .lineLimit(1)
+                                        
+                                Text(service.address)
+                                    .font(.subheadline)
+                                    .fontWeight(.ultraLight)
+                                    .lineLimit(1)
+                            }
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .foregroundColor(.black)
+                        .sheet(isPresented: $showingInfoSheet) {
+                            InfoSheet(index: index)
                         }
                         
                         Spacer()
                         
                         editServiceButton
+                            .buttonStyle(BorderlessButtonStyle())
                             .sheet(isPresented: $showingEditServiceSheet) {
                                 EditServiceSheet(index: index)
                             }
@@ -50,14 +63,16 @@ struct ServiceView: View {
                 
                 ToolbarItem(placement: .principal) {
                     Text("My Services").bold()
+                        .foregroundColor(.CSUFBlue())
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     editButton
                 }
             }
-
-        }.environmentObject(user)
+        }
+        .environmentObject(user)
+        .navigationBarBackButtonHidden(true)
     }
     
     var addButton: some View {
@@ -78,7 +93,8 @@ struct ServiceView: View {
         Button(action: {
             showingEditServiceSheet.toggle()
         }) {
-            Image(systemName: "info.circle")
+            Image(systemName: "pencil")
+                .foregroundColor(.CSUFOrange())
         }
     }
 }
@@ -280,6 +296,69 @@ struct EditServiceSheet: View {
             dismiss()
         }) {
             Text("Done").modifier(ButtonModifier())
+        }
+    }
+}
+
+struct InfoSheet: View {
+    @EnvironmentObject var user: User
+    
+    @Environment(\.dismiss) var dismiss
+    
+    var index: Int
+    var dateFormat = DateFormatter()
+    var timeFormat = DateFormatter()
+    
+    init(index: Int) {
+        self.index = index
+        dateFormat.dateStyle = .short
+        timeFormat.timeStyle = .short
+    }
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Button("Back") {
+                    dismiss()
+                }
+                .modifier(ButtonModifier())
+                .padding(.trailing)
+            }
+            .padding(.vertical, 10)
+            List {
+                Section(header: Text("Label").modifier(HeaderModifier())) {
+                    Text(user.myServices[index].label)
+                }
+                
+                Section(header: Text("Description").modifier(HeaderModifier())) {
+                    Text(user.myServices[index].desc)
+                }
+                
+                Section(header: Text("Address").modifier(HeaderModifier())) {
+                    Text(user.myServices[index].address)
+                }
+                
+                Section(header: Text("Date").modifier(HeaderModifier())) {
+                    Text(dateFormat.string(from: user.myServices[index].date))
+                }
+                
+                Section(header: Text("Time").modifier(HeaderModifier())) {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Start")
+                            Spacer()
+                            Text(timeFormat.string(from: user.myServices[index].startTime))
+                        }
+                        
+                        HStack {
+                            Text("End")
+                            Spacer()
+                            Text(timeFormat.string(from: user.myServices[index].endTime))
+                        }
+                    }
+                }
+            }.listStyle(InsetGroupedListStyle())
         }
     }
 }
