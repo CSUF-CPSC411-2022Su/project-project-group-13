@@ -123,7 +123,7 @@ struct AddServiceSheet: View {
                 
                 saveButton
                     .padding(.trailing)
-            }.padding(.vertical, 10)
+            }.padding(.top, 10)
             
             List {
                 labelSection
@@ -132,8 +132,8 @@ struct AddServiceSheet: View {
                 dateSection
                 timeSection
             }
-            .listStyle(InsetGroupedListStyle())
         }
+        .background(Color.CSUFBlue())
     }
     
     var labelSection: some View {
@@ -223,7 +223,7 @@ struct EditServiceSheet: View {
                 
                 doneButton
                     .padding(.trailing)
-            }.padding(.vertical, 10)
+            }.padding(.top, 10)
             
             List {
                 labelSection
@@ -232,8 +232,8 @@ struct EditServiceSheet: View {
                 dateSection
                 timeSection
             }
-            .listStyle(InsetGroupedListStyle())
         }
+        .background(Color.CSUFBlue())
     }
     
     var labelSection: some View {
@@ -325,7 +325,7 @@ struct InfoSheet: View {
                 .modifier(ButtonModifier())
                 .padding(.trailing)
             }
-            .padding(.vertical, 10)
+            .padding(.top, 10.0)
             List {
                 Section(header: Text("Label").modifier(HeaderModifier())) {
                     Text(user.myServices[index].label)
@@ -334,7 +334,7 @@ struct InfoSheet: View {
                 Section(header: Text("Description").modifier(HeaderModifier())) {
                     Text(user.myServices[index].desc)
                 }
-                
+   
                 Section(header: Text("Address").modifier(HeaderModifier())) {
                     Text(user.myServices[index].address)
                 }
@@ -358,8 +358,9 @@ struct InfoSheet: View {
                         }
                     }
                 }
-            }.listStyle(InsetGroupedListStyle())
+            }
         }
+        .background(Color.CSUFBlue())
     }
 }
 
