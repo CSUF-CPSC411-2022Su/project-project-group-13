@@ -337,6 +337,18 @@ struct InfoSheet: View {
    
                 Section(header: Text("Address").modifier(HeaderModifier())) {
                     Text(user.myServices[index].address)
+                    
+                    //Image placeholder
+                    Image(systemName: "compass.drawing")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 300)
+                        .clipShape(Rectangle())
+                        .overlay(Rectangle()
+                            .frame(width: 300, height: 300)
+                            .foregroundColor(Color.white)
+                        )
+                        .shadow(radius: 5)
                 }
                 
                 Section(header: Text("Date").modifier(HeaderModifier())) {
