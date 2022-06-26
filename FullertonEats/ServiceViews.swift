@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ServiceView: View {
+struct MyServiceView: View {
     @StateObject var user = User(username: "user", password: "pw")
     
     @State var showingAddServiceSheet = false
@@ -35,7 +35,7 @@ struct ServiceView: View {
                         .buttonStyle(BorderlessButtonStyle())
                         .foregroundColor(.black)
                         .sheet(isPresented: $showingInfoSheet) {
-                            InfoSheet(index: index)
+                            InfoSheet(index: index, of: "myServce")
                         }
                         
                         Spacer()
@@ -96,6 +96,63 @@ struct ServiceView: View {
             Image(systemName: "pencil")
                 .foregroundColor(.CSUFOrange())
         }
+    }
+}
+
+struct FavoritedServiceView: View {
+    @StateObject var user = User(username: "user", password: "pw")
+    
+    @State var showingInfoSheet = false
+    
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(Array(self.user.favoritedServices.enumerated()), id: \.1) { index, service in
+                    HStack {
+                        Button(action: {
+                            showingInfoSheet.toggle()
+                        }) {
+                            VStack(alignment: .leading) {
+                                Text(service.label)
+                                    .lineLimit(1)
+                                        
+                                Text(service.address)
+                                    .font(.subheadline)
+                                    .fontWeight(.ultraLight)
+                                    .lineLimit(1)
+                            }
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .foregroundColor(.black)
+                        .sheet(isPresented: $showingInfoSheet) {
+                            InfoSheet(index: index, of: "favoritedService")
+                        }
+                        
+                        Spacer()
+                    }
+                }
+                .onDelete {
+                    offset in
+                    user.favoritedServices.remove(atOffsets: offset)
+                }
+                .onMove {
+                    offset, index in
+                    user.favoritedServices.move(fromOffsets: offset, toOffset: index)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Favorited Services").bold()
+                        .foregroundColor(.CSUFBlue())
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton().modifier(ButtonModifier())
+                }
+            }
+        }
+        .environmentObject(user)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -306,16 +363,26 @@ struct InfoSheet: View {
     @Environment(\.dismiss) var dismiss
     
     var index: Int
+    var arrayType: String
     var dateFormat = DateFormatter()
     var timeFormat = DateFormatter()
     
-    init(index: Int) {
+    init(index: Int, of arrayType: String) {
         self.index = index
         dateFormat.dateStyle = .short
         timeFormat.timeStyle = .short
+        self.arrayType = arrayType
     }
     
     var body: some View {
+        if arrayType == "myService" {
+            myServiceInfoView
+        } else {
+            FavoritedServiceInfoView
+        }
+    }
+    
+    var myServiceInfoView: some View {
         VStack {
             HStack {
                 Spacer()
@@ -374,12 +441,74 @@ struct InfoSheet: View {
         }
         .background(Color.CSUFBlue())
     }
+    
+    var FavoritedServiceInfoView: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Button("Back") {
+                    dismiss()
+                }
+                .modifier(ButtonModifier())
+                .padding(.trailing)
+            }
+            .padding(.top, 10.0)
+            List {
+                Section(header: Text("Label").modifier(HeaderModifier())) {
+                    Text(user.favoritedServices[index].label)
+                }
+                
+                Section(header: Text("Description").modifier(HeaderModifier())) {
+                    Text(user.favoritedServices[index].desc)
+                }
+   
+                Section(header: Text("Address").modifier(HeaderModifier())) {
+                    Text(user.favoritedServices[index].address)
+                    
+                    //Image placeholder
+                    Image(systemName: "compass.drawing")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 300)
+                        .clipShape(Rectangle())
+                        .overlay(Rectangle()
+                            .frame(width: 300, height: 300)
+                            .foregroundColor(Color.white)
+                        )
+                        .shadow(radius: 5)
+                }
+                
+                Section(header: Text("Date").modifier(HeaderModifier())) {
+                    Text(dateFormat.string(from: user.favoritedServices[index].date))
+                }
+                
+                Section(header: Text("Time").modifier(HeaderModifier())) {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Start")
+                            Spacer()
+                            Text(timeFormat.string(from: user.favoritedServices[index].startTime))
+                        }
+                        
+                        HStack {
+                            Text("End")
+                            Spacer()
+                            Text(timeFormat.string(from: user.favoritedServices[index].endTime))
+                        }
+                    }
+                }
+            }
+        }
+        .background(Color.CSUFBlue())
+    }
 }
+
 
 struct ServiceForm_Previews: PreviewProvider {
     static var previews: some View {
 //        AddServiceForm()
 //                  .environmentObject(ServiceManager())
-        ServiceView()
+        //ServiceView()
+        FavoritedServiceView()
     }
 }
