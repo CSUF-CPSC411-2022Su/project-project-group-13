@@ -9,30 +9,39 @@ import Foundation
 import SwiftUI
 
 struct LoginScreenView: View {
-    @SceneStorage ("username") var username = ""
-    @SceneStorage ("password") var password = ""
-    @State private var wrongUsername: Float = 0
-    @State private var wrongPassword: Float = 0
-    @State private var showingLoginScreen = false
+    @SceneStorage("username") var username = ""
+    @SceneStorage("password") var password = ""
+    @StateObject var user = User()
+    @State var loginNotify: Bool = false
+    var userLoader = UserLoader()
+    
+    init() {
+        if let loaderUser = userLoader.loadUser() {
+            user.username = loaderUser.username
+            user.password = loaderUser.password
+            user.favoritedEvents = loaderUser.favoritedEvents
+            user.myEvents = loaderUser.myEvents
+        }
+    }
     
     var body: some View {
-        NavigationView{
-            ZStack{
-                Color.blue
+        NavigationView {
+            ZStack {
+                Color.CSUFBlue()
                     .ignoresSafeArea()
                 Circle()
                     .scale(1.7)
                     .foregroundColor(.white)
                 Circle()
                     .scale(1.35)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.CSUFOrange())
                 
-                VStack{
+                VStack {
                     Text("FullertonEats")
                         .font(.largeTitle)
                         .bold()
                         .padding()
-                    Text("login")
+                    Text("Login")
                         .font(.largeTitle)
                         .bold()
                         .padding()
@@ -41,46 +50,59 @@ struct LoginScreenView: View {
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                        .border(.red, width: CGFloat(wrongUsername))
+                        
                     TextField("Password", text: $password)
                         .padding()
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                        .border(.red, width: CGFloat(wrongPassword))
-                    
-                    NavigationLink(destination: ServiceView()) {
-                        Button("login"){
-                            
+                
+                    Button("login") {
+                        if user.username==username, user.password==password {
+                            loginNotify.toggle()
                         }
-                        .foregroundColor(.white)
-                        .frame(width: 300, height: 50)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                    
-                        
                     }
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 50)
+                    .background(Color.blue)
+                    .cornerRadius(10)
                 }
+                Login_Notify(login:$loginNotify)
             }
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
+}
     
-    func authenticateUser(username: String, password: String) {
-        if username == "Freddy" {
-            wrongUsername = 0
-            if password=="fullerton" {
-                wrongPassword = 0
-                showingLoginScreen = true
+struct Login_Notify: View {
+    @Binding var login: Bool
+    var body: some View {
+        ZStack {
+            if login {
+                VStack(spacing: 0) {
+                    Text("Success")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 100, alignment: .center)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+
+                    NavigationLink(destination: ContentView()) {
+                        Text("Homepage")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                            .foregroundColor(.white)
+                    }
+                    .background(Color.CSUFBlue())
+                }
+                .frame(maxWidth: 300)
+                .background(.white)
+                .cornerRadius(10)
+                .shadow(radius: 5)
             }
-            else {
-                wrongPassword = 2
-                wrongUsername = 2
         }
     }
 }
-}
-
+    
 struct LoginScreenView_Previews: PreviewProvider {
     static var previews: some View {
         Group {

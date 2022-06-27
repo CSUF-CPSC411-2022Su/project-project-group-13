@@ -67,17 +67,25 @@ struct SignUp_Notify: View {
     var body: some View {
         ZStack {
             if signUpPop {
-                VStack {
+                VStack(spacing: 0) {
                     Text("Account Created")
-                        .frame(width: 200, height: 50)
-                        .foregroundColor(Color.black)
-                        .font(.system(size: 15))
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                        Text("Good job")
-                    // TODO: NavigationLink()  Route to login page
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 100, alignment: .center)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+
+                    NavigationLink(destination: LoginScreenView()) {
+                        Text("Login")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                            .foregroundColor(.white)
+                    }
+                    .background(Color.CSUFBlue())
                 }
+                .frame(maxWidth: 300)
+                .background(.white)
+                .cornerRadius(10)
+                .shadow(radius: 5)
             }
         }
     }
