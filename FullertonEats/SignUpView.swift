@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct SignUpView: View {
-    @State private var usernameS: String = ""
-    @State private var passwordS: String = ""
+    @SceneStorage("usernameS") private var usernameS: String = ""
+    @SceneStorage("passwordS") private var passwordS: String = ""
     var loader = UserLoader()
     @StateObject var user = User()
     @State var popUpS: Bool = false
