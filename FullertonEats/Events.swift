@@ -1,5 +1,5 @@
 //
-//  Services.swift
+//  Events.swift
 //  FullertonEats
 //
 //  Created by Eric Chu on 6/11/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Service: Codable {
+struct Event: Codable {
     var label: String
     var desc: String
     var address: String

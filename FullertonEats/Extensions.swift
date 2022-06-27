@@ -23,8 +23,8 @@ extension Date {
     }
 }
 
-extension Service: Hashable {
-    static func == (lhs: Service, rhs: Service) -> Bool {
+extension Event: Hashable {
+    static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.label == rhs.label &&
             lhs.desc == rhs.desc &&
             lhs.address == rhs.address &&

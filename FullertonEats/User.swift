@@ -10,13 +10,13 @@ import SwiftUI
 class User: ObservableObject, Codable {
     
     enum CodingKeys: CodingKey {
-        case username, password, favoritedServices, myServices
+        case username, password, favoritedEvents, myEvents
     }
     
     var username: String
     var password: String
-    @Published var favoritedServices: [Service] = []
-    @Published var myServices: [Service] = []
+    @Published var favoritedEvents: [Event] = []
+    @Published var myEvents: [Event] = []
     
     init() {
         self.username = ""
@@ -28,25 +28,25 @@ class User: ObservableObject, Codable {
         
         username = try container.decode(String.self, forKey: .username)
         password = try container.decode(String.self, forKey: .password)
-        favoritedServices = try container.decode([Service].self, forKey: .favoritedServices)
-        myServices = try container.decode([Service].self, forKey: .myServices)
+        favoritedEvents = try container.decode([Event].self, forKey: .favoritedEvents)
+        myEvents = try container.decode([Event].self, forKey: .myEvents)
     }
     
     init(username: String, password: String) {
         self.username = username
         self.password = password
     
-        myServices.append(Service(label: "Hot Dogs", desc: "Free hot dogs! With condiments.", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+        myEvents.append(Event(label: "Hot Dogs", desc: "Free hot dogs! With condiments.", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
-        myServices.append(Service(label: "Burgers", desc: "Vegan burgers!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+        myEvents.append(Event(label: "Burgers", desc: "Vegan burgers!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
-        myServices.append(Service(label: "Tacos", desc: "Beef or chicken!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+        myEvents.append(Event(label: "Tacos", desc: "Beef or chicken!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
-        favoritedServices.append(Service(label: "Bread and Water", desc: "All types of bread and water", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+        favoritedEvents.append(Event(label: "Bread and Water", desc: "All types of bread and water", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
-        favoritedServices.append(Service(label: "Soup", desc: "Tomato and chicken noodle soup!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+        favoritedEvents.append(Event(label: "Soup", desc: "Tomato and chicken noodle soup!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
-        favoritedServices.append(Service(label: "Fruits", desc: "All types of fruit served here!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+        favoritedEvents.append(Event(label: "Fruits", desc: "All types of fruit served here!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
     }
     
@@ -55,38 +55,38 @@ class User: ObservableObject, Codable {
         
         try container.encode(username, forKey: .username)
         try container.encode(password, forKey: .password)
-        try container.encode(favoritedServices, forKey: .favoritedServices)
-        try container.encode(myServices, forKey: .myServices)
+        try container.encode(favoritedEvents, forKey: .favoritedEvents)
+        try container.encode(myEvents, forKey: .myEvents)
     }
     
-    // returns the index of the upcoming service from favoritedServices
-    func getUpcomingFavoriteService() -> Int? {
-        if favoritedServices.count == 0 {
+    // returns the index of the upcoming event from favoritedEvents
+    func getUpcomingFavoriteEvent() -> Int? {
+        if favoritedEvents.count == 0 {
             return nil
-        } else if favoritedServices.count == 1 {
+        } else if favoritedEvents.count == 1 {
             return 1
         }
-        return getUpcoming(serviceArr: favoritedServices)
+        return getUpcoming(eventArr: favoritedEvents)
     }
     
-    // returns the index of the upcoming service from myServices
-    func getUpcomingMyService() -> Int? {
-        if myServices.count == 0 {
+    // returns the index of the upcoming event from myEvents
+    func getUpcomingMyEvent() -> Int? {
+        if myEvents.count == 0 {
             return nil
-        } else if myServices.count == 1 {
+        } else if myEvents.count == 1 {
             return 1
         }
-        return getUpcoming(serviceArr: myServices)
+        return getUpcoming(eventArr: myEvents)
     }
     
-    // Helper function, returns the index of the upcoming service from a service array
-    private func getUpcoming(serviceArr: [Service]) -> Int {
+    // Helper function, returns the index of the upcoming event from an Event array
+    private func getUpcoming(eventArr: [Event]) -> Int {
         var upcomingIndex = 0
         var min = 0.0
         
-        min = Date.now - serviceArr[0].date
-        for i in 1 ... serviceArr.count - 1 {
-            let temp = Date.now - serviceArr[i].date
+        min = Date.now - eventArr[0].date
+        for i in 1 ... eventArr.count - 1 {
+            let temp = Date.now - eventArr[i].date
             
             if temp < min {
                 min = temp
@@ -114,7 +114,7 @@ struct UserLoader {
         return nil
     }
     
-    // call this function on user signup and service manipulation
+    // call this function on user signup and event manipulation
     func saveUser(user: User) {
         let propertyListEncoder = PropertyListEncoder()
         if let encodedUser = try? propertyListEncoder.encode(user) {

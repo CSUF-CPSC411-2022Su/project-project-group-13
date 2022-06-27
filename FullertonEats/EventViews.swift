@@ -1,5 +1,5 @@
 //
-//  ServiceViews.swift
+//  EventViews.swift
 //  FullertonEats
 //
 //  Created by Eric Chu on 6/16/22.
@@ -7,26 +7,27 @@
 
 import SwiftUI
 
-struct MyServiceView: View {
+struct MyEventsView: View {
+    // change to environment object once merged
     @StateObject var user = User(username: "user", password: "pw")
     
-    @State var showingAddServiceSheet = false
-    @State var showingEditServiceSheet = false
+    @State var showingAddEventSheet = false
+    @State var showingEditEventSheet = false
     @State var showingInfoSheet = false
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(Array(self.user.myServices.enumerated()), id: \.1) { index, service in
+                ForEach(Array(self.user.myEvents.enumerated()), id: \.1) { index, event in
                     HStack {
                         Button(action: {
                             showingInfoSheet.toggle()
                         }) {
                             VStack(alignment: .leading) {
-                                Text(service.label)
+                                Text(event.label)
                                     .lineLimit(1)
                                         
-                                Text(service.address)
+                                Text(event.address)
                                     .font(.subheadline)
                                     .fontWeight(.ultraLight)
                                     .lineLimit(1)
@@ -35,25 +36,25 @@ struct MyServiceView: View {
                         .buttonStyle(BorderlessButtonStyle())
                         .foregroundColor(.black)
                         .sheet(isPresented: $showingInfoSheet) {
-                            InfoSheet(index: index, of: "myServce")
+                            InfoSheet(index: index, of: "myEvents")
                         }
                         
                         Spacer()
                         
-                        editServiceButton
+                        editEventbutton
                             .buttonStyle(BorderlessButtonStyle())
-                            .sheet(isPresented: $showingEditServiceSheet) {
-                                EditServiceSheet(index: index)
+                            .sheet(isPresented: $showingEditEventSheet) {
+                                EditEventSheet(index: index)
                             }
                     }
                 }
                 .onDelete {
                     offset in
-                    user.myServices.remove(atOffsets: offset)
+                    user.myEvents.remove(atOffsets: offset)
                 }
                 .onMove {
                     offset, index in
-                    user.myServices.move(fromOffsets: offset, toOffset: index)
+                    user.myEvents.move(fromOffsets: offset, toOffset: index)
                 }
             }
             .toolbar {
@@ -62,7 +63,7 @@ struct MyServiceView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text("My Services").bold()
+                    Text("My Events").bold()
                         .foregroundColor(.CSUFBlue())
                 }
                 
@@ -77,10 +78,10 @@ struct MyServiceView: View {
     
     var addButton: some View {
         Button("Add") {
-            showingAddServiceSheet.toggle()
+            showingAddEventSheet.toggle()
         }
-        .sheet(isPresented: $showingAddServiceSheet) {
-            AddServiceSheet()
+        .sheet(isPresented: $showingAddEventSheet) {
+            AddEventSheet()
         }
         .modifier(ButtonModifier())
     }
@@ -89,9 +90,9 @@ struct MyServiceView: View {
         EditButton().modifier(ButtonModifier())
     }
     
-    var editServiceButton: some View {
+    var editEventbutton: some View {
         Button(action: {
-            showingEditServiceSheet.toggle()
+            showingEditEventSheet.toggle()
         }) {
             Image(systemName: "pencil")
                 .foregroundColor(.CSUFOrange())
@@ -99,7 +100,7 @@ struct MyServiceView: View {
     }
 }
 
-struct FavoritedServiceView: View {
+struct FavoritedEventsView: View {
     @StateObject var user = User(username: "user", password: "pw")
     
     @State var showingInfoSheet = false
@@ -107,16 +108,16 @@ struct FavoritedServiceView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(Array(self.user.favoritedServices.enumerated()), id: \.1) { index, service in
+                ForEach(Array(self.user.favoritedEvents.enumerated()), id: \.1) { index, event in
                     HStack {
                         Button(action: {
                             showingInfoSheet.toggle()
                         }) {
                             VStack(alignment: .leading) {
-                                Text(service.label)
+                                Text(event.label)
                                     .lineLimit(1)
                                         
-                                Text(service.address)
+                                Text(event.address)
                                     .font(.subheadline)
                                     .fontWeight(.ultraLight)
                                     .lineLimit(1)
@@ -125,7 +126,7 @@ struct FavoritedServiceView: View {
                         .buttonStyle(BorderlessButtonStyle())
                         .foregroundColor(.black)
                         .sheet(isPresented: $showingInfoSheet) {
-                            InfoSheet(index: index, of: "favoritedService")
+                            InfoSheet(index: index, of: "favoritedEvents")
                         }
                         
                         Spacer()
@@ -133,16 +134,16 @@ struct FavoritedServiceView: View {
                 }
                 .onDelete {
                     offset in
-                    user.favoritedServices.remove(atOffsets: offset)
+                    user.favoritedEvents.remove(atOffsets: offset)
                 }
                 .onMove {
                     offset, index in
-                    user.favoritedServices.move(fromOffsets: offset, toOffset: index)
+                    user.favoritedEvents.move(fromOffsets: offset, toOffset: index)
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Favorited Services").bold()
+                    Text("Favorited Events").bold()
                         .foregroundColor(.CSUFBlue())
                 }
                 
@@ -156,7 +157,7 @@ struct FavoritedServiceView: View {
     }
 }
 
-struct AddServiceSheet: View {
+struct AddEventSheet: View {
     @EnvironmentObject var user: User
     @State var label: String = ""
     @State var desc: String = ""
@@ -164,33 +165,37 @@ struct AddServiceSheet: View {
     @State var date: Date = .init()
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
+    @State var showErrorMessage: Bool = false
     
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        VStack {
-            HStack {
-                Button("Cancel") {
-                    dismiss()
+        ZStack {
+            VStack {
+                HStack {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    .modifier(ButtonModifier())
+                    .padding(.leading)
+                    
+                    Spacer()
+                    
+                    saveButton
+                        .padding(.trailing)
+                }.padding(.top, 10)
+                
+                List {
+                    labelSection
+                    descSection
+                    addressSection
+                    dateSection
+                    timeSection
                 }
-                .modifier(ButtonModifier())
-                .padding(.leading)
-                
-                Spacer()
-                
-                saveButton
-                    .padding(.trailing)
-            }.padding(.top, 10)
-            
-            List {
-                labelSection
-                descSection
-                addressSection
-                dateSection
-                timeSection
             }
+            .background(Color.CSUFBlue())
+            ErrorMessage(showErrorMessage: $showErrorMessage)
         }
-        .background(Color.CSUFBlue())
     }
     
     var labelSection: some View {
@@ -235,13 +240,12 @@ struct AddServiceSheet: View {
     var saveButton: some View {
         Button(action: {
             if !label.isEmpty, !address.isEmpty {
-                let newService = Service(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
+                let newEvent = Event(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
 
-                user.myServices.append(newService)
+                user.myEvents.append(newEvent)
                 dismiss()
             } else {
-                // TODO: -> popup error message
-                print("error")
+                showErrorMessage.toggle()
             }
         }) {
             Text("Save")
@@ -250,7 +254,7 @@ struct AddServiceSheet: View {
     }
 }
 
-struct EditServiceSheet: View {
+struct EditEventSheet: View {
     @EnvironmentObject var user: User
     @State var label: String = ""
     @State var desc: String = ""
@@ -258,6 +262,7 @@ struct EditServiceSheet: View {
     @State var date: Date = .init()
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
+    @State var showErrorMessage: Bool = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -268,36 +273,40 @@ struct EditServiceSheet: View {
     }
 
     var body: some View {
-        VStack {
-            HStack {
-                Button("Cancel") {
-                    dismiss()
+        ZStack {
+            VStack {
+                HStack {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    .modifier(ButtonModifier())
+                    .padding(.leading)
+                    
+                    Spacer()
+                    
+                    doneButton
+                        .padding(.trailing)
+                }.padding(.top, 10)
+                
+                List {
+                    labelSection
+                    descSection
+                    addressSection
+                    dateSection
+                    timeSection
                 }
-                .modifier(ButtonModifier())
-                .padding(.leading)
-                
-                Spacer()
-                
-                doneButton
-                    .padding(.trailing)
-            }.padding(.top, 10)
-            
-            List {
-                labelSection
-                descSection
-                addressSection
-                dateSection
-                timeSection
             }
+            .background(Color.CSUFBlue())
+            
+            ErrorMessage(showErrorMessage: $showErrorMessage)
         }
-        .background(Color.CSUFBlue())
     }
     
     var labelSection: some View {
         Section(header: Text("Label").modifier(HeaderModifier())) {
             TextField("", text: $label)
                 .onAppear {
-                    self.label = user.myServices[index].label
+                    self.label = user.myEvents[index].label
                 }
         }
     }
@@ -306,7 +315,7 @@ struct EditServiceSheet: View {
         Section(header: Text("Description").modifier(HeaderModifier())) {
             TextField("", text: $desc)
                 .onAppear {
-                    self.desc = user.myServices[index].desc
+                    self.desc = user.myEvents[index].desc
                 }
         }
     }
@@ -315,7 +324,7 @@ struct EditServiceSheet: View {
         Section(header: Text("Address").modifier(HeaderModifier())) {
             TextField("", text: $address)
                 .onAppear {
-                    self.address = user.myServices[index].address
+                    self.address = user.myEvents[index].address
                 }
         }
     }
@@ -326,7 +335,7 @@ struct EditServiceSheet: View {
                 .labelsHidden()
                 .datePickerStyle(WheelDatePickerStyle())
                 .onAppear {
-                    self.date = user.myServices[index].date
+                    self.date = user.myEvents[index].date
                 }
         }
     }
@@ -336,21 +345,25 @@ struct EditServiceSheet: View {
             .modifier(HeaderModifier())) {
                 DatePicker("Start", selection: $startTime, displayedComponents: .hourAndMinute)
                     .onAppear {
-                        self.startTime = user.myServices[index].startTime
+                        self.startTime = user.myEvents[index].startTime
                     }
 
                 DatePicker("End", selection: $endTime, displayedComponents: .hourAndMinute)
                     .onAppear {
-                        self.endTime = user.myServices[index].endTime
+                        self.endTime = user.myEvents[index].endTime
                     }
             }
     }
     
     var doneButton: some View {
         Button(action: {
-            user.myServices[index].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
-            
-            dismiss()
+            if !label.isEmpty, !address.isEmpty {
+                user.myEvents[index].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
+                
+                dismiss()
+            } else {
+                showErrorMessage.toggle()
+            }
         }) {
             Text("Done").modifier(ButtonModifier())
         }
@@ -375,14 +388,14 @@ struct InfoSheet: View {
     }
     
     var body: some View {
-        if arrayType == "myService" {
-            myServiceInfoView
+        if arrayType == "myEvents" {
+            myEventsInfoView
         } else {
-            FavoritedServiceInfoView
+            FavoritedEventsInfoView
         }
     }
     
-    var myServiceInfoView: some View {
+    var myEventsInfoView: some View {
         VStack {
             HStack {
                 Spacer()
@@ -395,21 +408,21 @@ struct InfoSheet: View {
             .padding(.top, 10.0)
             List {
                 Section(header: Text("Label").modifier(HeaderModifier())) {
-                    Text(user.myServices[index].label)
+                    Text(user.myEvents[index].label)
                 }
                 
                 Section(header: Text("Description").modifier(HeaderModifier())) {
-                    Text(user.myServices[index].desc)
+                    Text(user.myEvents[index].desc)
                 }
    
                 Section(header: Text("Address").modifier(HeaderModifier())) {
-                    Text(user.myServices[index].address)
+                    Text(user.myEvents[index].address)
                     
-                    //Image placeholder
+                    // Image placeholder
                     Image(systemName: "compass.drawing")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 300, height: 300)
+                        .frame(width: 300, height: 300, alignment: .center)
                         .clipShape(Rectangle())
                         .overlay(Rectangle()
                             .frame(width: 300, height: 300)
@@ -419,7 +432,7 @@ struct InfoSheet: View {
                 }
                 
                 Section(header: Text("Date").modifier(HeaderModifier())) {
-                    Text(dateFormat.string(from: user.myServices[index].date))
+                    Text(dateFormat.string(from: user.myEvents[index].date))
                 }
                 
                 Section(header: Text("Time").modifier(HeaderModifier())) {
@@ -427,13 +440,13 @@ struct InfoSheet: View {
                         HStack {
                             Text("Start")
                             Spacer()
-                            Text(timeFormat.string(from: user.myServices[index].startTime))
+                            Text(timeFormat.string(from: user.myEvents[index].startTime))
                         }
                         
                         HStack {
                             Text("End")
                             Spacer()
-                            Text(timeFormat.string(from: user.myServices[index].endTime))
+                            Text(timeFormat.string(from: user.myEvents[index].endTime))
                         }
                     }
                 }
@@ -442,7 +455,7 @@ struct InfoSheet: View {
         .background(Color.CSUFBlue())
     }
     
-    var FavoritedServiceInfoView: some View {
+    var FavoritedEventsInfoView: some View {
         VStack {
             HStack {
                 Spacer()
@@ -455,17 +468,17 @@ struct InfoSheet: View {
             .padding(.top, 10.0)
             List {
                 Section(header: Text("Label").modifier(HeaderModifier())) {
-                    Text(user.favoritedServices[index].label)
+                    Text(user.favoritedEvents[index].label)
                 }
                 
                 Section(header: Text("Description").modifier(HeaderModifier())) {
-                    Text(user.favoritedServices[index].desc)
+                    Text(user.favoritedEvents[index].desc)
                 }
    
                 Section(header: Text("Address").modifier(HeaderModifier())) {
-                    Text(user.favoritedServices[index].address)
+                    Text(user.favoritedEvents[index].address)
                     
-                    //Image placeholder
+                    // Image placeholder
                     Image(systemName: "compass.drawing")
                         .resizable()
                         .scaledToFit()
@@ -479,7 +492,7 @@ struct InfoSheet: View {
                 }
                 
                 Section(header: Text("Date").modifier(HeaderModifier())) {
-                    Text(dateFormat.string(from: user.favoritedServices[index].date))
+                    Text(dateFormat.string(from: user.favoritedEvents[index].date))
                 }
                 
                 Section(header: Text("Time").modifier(HeaderModifier())) {
@@ -487,13 +500,13 @@ struct InfoSheet: View {
                         HStack {
                             Text("Start")
                             Spacer()
-                            Text(timeFormat.string(from: user.favoritedServices[index].startTime))
+                            Text(timeFormat.string(from: user.favoritedEvents[index].startTime))
                         }
                         
                         HStack {
                             Text("End")
                             Spacer()
-                            Text(timeFormat.string(from: user.favoritedServices[index].endTime))
+                            Text(timeFormat.string(from: user.favoritedEvents[index].endTime))
                         }
                     }
                 }
@@ -503,12 +516,54 @@ struct InfoSheet: View {
     }
 }
 
+struct Background: View {
+    var body: some View {
+        Color.CSUFBlue()
+            .ignoresSafeArea()
+        Circle()
+            .scale(1.7)
+            .foregroundColor(.white)
+        Circle()
+            .scale(1.35)
+            .foregroundColor(Color.CSUFOrange())
+    }
+}
 
-struct ServiceForm_Previews: PreviewProvider {
+struct ErrorMessage: View {
+    @Binding var showErrorMessage: Bool
+    
+    var body: some View {
+        ZStack {
+            if showErrorMessage {
+                VStack(alignment: .center, spacing: 0) {
+                    Text("Label and Address cannot be empty.")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 100, alignment: .center)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+                    
+                    Button(action: {
+                        showErrorMessage = false
+                    }) {
+                        Text("Dismiss")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .background(Color.CSUFBlue())
+                }
+                .frame(maxWidth: 300)
+                .background(.white)
+                .cornerRadius(15)
+                .shadow(radius: 5)
+            }
+        }
+    }
+}
+
+struct EventsForm_Previews: PreviewProvider {
     static var previews: some View {
-//        AddServiceForm()
-//                  .environmentObject(ServiceManager())
-        //ServiceView()
-        FavoritedServiceView()
+        //MyEventsView()
+        FavoritedEventsView()
     }
 }
