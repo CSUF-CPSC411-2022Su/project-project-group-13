@@ -95,6 +95,14 @@ class User: ObservableObject, Codable {
         }
         return upcomingIndex
     }
+    
+    func assignUser(user: User) {
+        self.username = user.username
+        self.password = user.password
+        self.favoritedEvents = user.favoritedEvents
+        self.myEvents = user.myEvents
+    }
+    
 }
 
 struct UserLoader {

@@ -11,7 +11,6 @@
 		2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C165A1B285C3C3100A2A062 /* Modifiers.swift */; };
 		2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1EF29A285D84FE00235CDA /* Extensions.swift */; };
 		2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */; };
-		2CA75B6828514BEA00065454 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B6728514BEA00065454 /* ContentView.swift */; };
 		2CA75B6A28514BEE00065454 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B6928514BEE00065454 /* Assets.xcassets */; };
 		2CA75B6D28514BEE00065454 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B6C28514BEE00065454 /* Preview Assets.xcassets */; };
 		2CA75B7728514BEE00065454 /* FullertonEatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B7628514BEE00065454 /* FullertonEatsTests.swift */; };
@@ -21,6 +20,8 @@
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
 		2CF0D2A7285484900018F602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Event.swift */; };
 		2CFD6E83285EC0B9006688A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6E82285EC0B9006688A1 /* User.swift */; };
+		7A7DA39928695CCB00091BE3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7DA39828695CCB00091BE3 /* SignUpView.swift */; };
+		7A7DA39F286961B800091BE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7DA39E286961B800091BE3 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,6 @@
 		2C1EF29A285D84FE00235CDA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2CA75B6228514BEA00065454 /* FullertonEats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullertonEats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsApp.swift; sourceTree = "<group>"; };
-		2CA75B6728514BEA00065454 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2CA75B6928514BEE00065454 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CA75B6C28514BEE00065454 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2CA75B7228514BEE00065454 /* FullertonEatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FullertonEatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +58,8 @@
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		2CF0D2A6285484900018F602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2CFD6E82285EC0B9006688A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7A7DA39828695CCB00091BE3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		7A7DA39E286961B800091BE3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,12 @@
 			isa = PBXGroup;
 			children = (
 				2CF0D2A6285484900018F602 /* Event.swift */,
+				7A7DA39E286961B800091BE3 /* ContentView.swift */,
+				7A7DA39828695CCB00091BE3 /* SignUpView.swift */,
+				2CF0D2A6285484900018F602 /* Services.swift */,
+				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
+				2C165A19285C324B00A2A062 /* ServiceViews.swift */,
+				2CF0D2A6285484900018F602 /* Events.swift */,
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				2CA75B6728514BEA00065454 /* ContentView.swift */,
 				2C165A19285C324B00A2A062 /* EventViews.swift */,
@@ -280,6 +288,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A7DA39928695CCB00091BE3 /* SignUpView.swift in Sources */,
+				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
+				2C165A1A285C324C00A2A062 /* ServiceViews.swift in Sources */,
+				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
+				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
+				7A7DA39F286961B800091BE3 /* ContentView.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Services.swift in Sources */,
+				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
+				2C165A1A285C324C00A2A062 /* ServiceViews.swift in Sources */,
+				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
+				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Services.swift in Sources */,
 				2C165A1A285C324C00A2A062 /* EventViews.swift in Sources */,
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
@@ -445,7 +465,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FullertonEats/Preview Content\"";
-				DEVELOPMENT_TEAM = GP8Z3FS8XZ;
+				DEVELOPMENT_TEAM = VN7NG2YWMP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

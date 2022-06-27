@@ -11,7 +11,7 @@ import SwiftUI
 struct FullertonEatsApp: App {
     var body: some Scene {
         WindowGroup {
-            MyEventsView()
+            SignUpView()
         }
     }
 }
