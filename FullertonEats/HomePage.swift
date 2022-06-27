@@ -37,14 +37,7 @@ struct BottomNavBar: View {
 struct HomePage: View {
     var body: some View {
         ZStack {
-            Color.CSUFBlue()
-                .ignoresSafeArea()
-            Circle()
-                .scale(1.7)
-                .foregroundColor(.white)
-            Circle()
-                .scale(1.35)
-                .foregroundColor(.CSUFOrange())
+            BackgroundDesign()
         }
     }
 }
