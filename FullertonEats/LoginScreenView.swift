@@ -1,74 +1,86 @@
 //
-//  SignUpView.swift
+//  LoginScreenView.swift
 //  FullertonEats
 //
-//  Created by Eric Chu on 6/8/22.
+//  Created by csuftitan on 6/18/22.
 //
 
 import Foundation
 import SwiftUI
 
-struct SignUpView: View {
-    @State private var usernameS: String = ""
-    @State private var passwordS: String = ""
-    var loader = UserLoader()
+struct LoginScreenView: View {
+    @SceneStorage("username") var username = ""
+    @SceneStorage("password") var password = ""
     @StateObject var user = User()
-    @State var popUpS: Bool = false
+    @State var loginNotify: Bool = false
+    var userLoader = UserLoader()
+    
+    init() {
+        if let loaderUser = userLoader.loadUser() {
+            user.username = loaderUser.username
+            user.password = loaderUser.password
+            user.favoritedEvents = loaderUser.favoritedEvents
+            user.myEvents = loaderUser.myEvents
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
                 BackgroundDesign()
+                
                 VStack {
                     Text("FullertonEats")
                         .font(.largeTitle)
                         .bold()
                         .padding()
-                    Text("Sign Up")
+                    Text("Login")
                         .font(.largeTitle)
                         .bold()
                         .padding()
-                    TextField("Username", text: $usernameS)
+                    TextField("Username", text: $username)
                         .padding()
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                    TextField("Password", text: $passwordS)
+                        
+                    TextField("Password", text: $password)
                         .padding()
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                    Button("signup") { // Implement file creation & write
-                        self.usernameS = usernameS
-                        self.passwordS = passwordS
-                        loader.saveUser(user: user)
-                        popUpS.toggle()
+                
+                    Button("login") {
+                        if user.username==username, user.password==password {
+                            loginNotify.toggle()
+                        }
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
                 }
-                SignUp_Notify(signUpPop: $popUpS)
+                Login_Notify(login: $loginNotify)
             }
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
-
-struct SignUp_Notify: View {
-    @Binding var signUpPop: Bool
+    
+struct Login_Notify: View {
+    @Binding var login: Bool
     var body: some View {
         ZStack {
-            if signUpPop {
+            if login {
                 VStack(spacing: 0) {
-                    Text("Account Created")
+                    Text("Success")
                         .frame(maxWidth: .infinity)
                         .frame(height: 100, alignment: .center)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
 
-                    NavigationLink(destination: LoginScreenView()) {
-                        Text("Login")
+                    NavigationLink(destination: ContentView()) {
+                        Text("Homepage")
                             .frame(maxWidth: .infinity)
                             .frame(height: 50, alignment: .center)
                             .foregroundColor(.white)
@@ -83,9 +95,11 @@ struct SignUp_Notify: View {
         }
     }
 }
-
-struct SignUpView_Previews: PreviewProvider {
+    
+struct LoginScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        Group {
+            LoginScreenView()
+        }
     }
 }
