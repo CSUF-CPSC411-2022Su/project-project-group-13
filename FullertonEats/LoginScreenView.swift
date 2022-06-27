@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct LoginScreenView: View {
-    @State private var username = ""
-    @State private var password = ""
+    @SceneStorage ("username") var username = ""
+    @SceneStorage ("password") var password = ""
     @State private var wrongUsername: Float = 0
     @State private var wrongPassword: Float = 0
     @State private var showingLoginScreen = false
