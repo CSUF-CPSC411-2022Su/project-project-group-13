@@ -2,7 +2,27 @@
 //  ContentView.swift
 //  FullertonEats
 //
-//  Created by csuftitan on 6/26/22.
+//  Created by Eric Chu on 6/8/22.
 //
 
-import Foundation
+import SwiftUI
+
+struct ContentView: View {
+    
+    var body: some View {
+        Text("")
+    }
+}
+
+
+
+
+
+
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
