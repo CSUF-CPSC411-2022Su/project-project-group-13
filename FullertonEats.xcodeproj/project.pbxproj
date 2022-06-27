@@ -19,7 +19,7 @@
 		2CA75B8328514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */; };
 		2CA75B9028514C2300065454 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B8F28514C2300065454 /* .gitignore */; };
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
-		2CF0D2A7285484900018F602 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Events.swift */; };
+		2CF0D2A7285484900018F602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Event.swift */; };
 		2CFD6E83285EC0B9006688A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6E82285EC0B9006688A1 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,7 @@
 		2CA75B8228514BEE00065454 /* FullertonEatsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullertonEatsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2CA75B8F28514C2300065454 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
-		2CF0D2A6285484900018F602 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		2CF0D2A6285484900018F602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2CFD6E82285EC0B9006688A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,7 +110,7 @@
 		2CA75B6428514BEA00065454 /* FullertonEats */ = {
 			isa = PBXGroup;
 			children = (
-				2CF0D2A6285484900018F602 /* Events.swift */,
+				2CF0D2A6285484900018F602 /* Event.swift */,
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				2CA75B6728514BEA00065454 /* ContentView.swift */,
 				2C165A19285C324B00A2A062 /* EventViews.swift */,
@@ -284,7 +284,7 @@
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
 				2CA75B6828514BEA00065454 /* ContentView.swift in Sources */,
-				2CF0D2A7285484900018F602 /* Events.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Event.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
 				2CFD6E83285EC0B9006688A1 /* User.swift in Sources */,
 			);

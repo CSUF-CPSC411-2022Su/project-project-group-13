@@ -10,66 +10,73 @@ import SwiftUI
 struct MyEventsView: View {
     // change to environment object once merged
     @StateObject var user = User(username: "user", password: "pw")
-    
     @State var showingAddEventSheet = false
     @State var showingEditEventSheet = false
     @State var showingInfoSheet = false
+    
+    init() {
+        UITableView.appearance().backgroundColor = .clear
+    }
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(Array(self.user.myEvents.enumerated()), id: \.1) { index, event in
-                    HStack {
-                        Button(action: {
-                            showingInfoSheet.toggle()
-                        }) {
-                            VStack(alignment: .leading) {
-                                Text(event.label)
-                                    .lineLimit(1)
+            ZStack {
+                BackgroundDesign()
+                List {
+                    ForEach(Array(self.user.myEvents.enumerated()), id: \.1) { index, event in
+                        HStack {
+                            Button(action: {
+                                showingInfoSheet.toggle()
+                            }) {
+                                VStack(alignment: .leading) {
+                                    Text(event.label)
+                                        .lineLimit(1)
                                         
-                                Text(event.address)
-                                    .font(.subheadline)
-                                    .fontWeight(.ultraLight)
-                                    .lineLimit(1)
+                                    Text(event.address)
+                                        .font(.subheadline)
+                                        .fontWeight(.ultraLight)
+                                        .lineLimit(1)
+                                }
                             }
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-                        .foregroundColor(.black)
-                        .sheet(isPresented: $showingInfoSheet) {
-                            InfoSheet(index: index, of: "myEvents")
-                        }
-                        
-                        Spacer()
-                        
-                        editEventbutton
                             .buttonStyle(BorderlessButtonStyle())
-                            .sheet(isPresented: $showingEditEventSheet) {
-                                EditEventSheet(index: index)
+                            .foregroundColor(.black)
+                            .sheet(isPresented: $showingInfoSheet) {
+                                InfoSheet(index: index, of: "myEvents")
                             }
+                        
+                            Spacer()
+                        
+                            editEventbutton
+                                .buttonStyle(BorderlessButtonStyle())
+                                .sheet(isPresented: $showingEditEventSheet) {
+                                    EditEventSheet(index: index)
+                                }
+                        }
+                    }
+                    .onDelete {
+                        offset in
+                        user.myEvents.remove(atOffsets: offset)
+                    }
+                    .onMove {
+                        offset, index in
+                        user.myEvents.move(fromOffsets: offset, toOffset: index)
                     }
                 }
-                .onDelete {
-                    offset in
-                    user.myEvents.remove(atOffsets: offset)
-                }
-                .onMove {
-                    offset, index in
-                    user.myEvents.move(fromOffsets: offset, toOffset: index)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    addButton
-                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        addButton
+                    }
                 
-                ToolbarItem(placement: .principal) {
-                    Text("My Events").bold()
-                        .foregroundColor(.CSUFBlue())
-                }
+                    ToolbarItem(placement: .principal) {
+                        Text("My Events")
+                            .modifier(TitleModifier())
+                    }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    editButton
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        editButton
+                    }
                 }
+                .shadow(radius: 15)
             }
         }
         .environmentObject(user)
@@ -102,54 +109,61 @@ struct MyEventsView: View {
 
 struct FavoritedEventsView: View {
     @StateObject var user = User(username: "user", password: "pw")
-    
     @State var showingInfoSheet = false
+    
+    init() {
+        UITableView.appearance().backgroundColor = .clear
+    }
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(Array(self.user.favoritedEvents.enumerated()), id: \.1) { index, event in
-                    HStack {
-                        Button(action: {
-                            showingInfoSheet.toggle()
-                        }) {
-                            VStack(alignment: .leading) {
-                                Text(event.label)
-                                    .lineLimit(1)
+            ZStack {
+                BackgroundDesign()
+                List {
+                    ForEach(Array(self.user.favoritedEvents.enumerated()), id: \.1) { index, event in
+                        HStack {
+                            Button(action: {
+                                showingInfoSheet.toggle()
+                            }) {
+                                VStack(alignment: .leading) {
+                                    Text(event.label)
+                                        .lineLimit(1)
                                         
-                                Text(event.address)
-                                    .font(.subheadline)
-                                    .fontWeight(.ultraLight)
-                                    .lineLimit(1)
+                                    Text(event.address)
+                                        .font(.subheadline)
+                                        .fontWeight(.ultraLight)
+                                        .lineLimit(1)
+                                }
                             }
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-                        .foregroundColor(.black)
-                        .sheet(isPresented: $showingInfoSheet) {
-                            InfoSheet(index: index, of: "favoritedEvents")
-                        }
+                            .buttonStyle(BorderlessButtonStyle())
+                            .foregroundColor(.black)
+                            .sheet(isPresented: $showingInfoSheet) {
+                                InfoSheet(index: index, of: "favoritedEvents")
+                            }
                         
-                        Spacer()
+                            Spacer()
+                        }
+                    }
+                    .onDelete {
+                        offset in
+                        user.favoritedEvents.remove(atOffsets: offset)
+                    }
+                    .onMove {
+                        offset, index in
+                        user.favoritedEvents.move(fromOffsets: offset, toOffset: index)
                     }
                 }
-                .onDelete {
-                    offset in
-                    user.favoritedEvents.remove(atOffsets: offset)
-                }
-                .onMove {
-                    offset, index in
-                    user.favoritedEvents.move(fromOffsets: offset, toOffset: index)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Favorited Events").bold()
-                        .foregroundColor(.CSUFBlue())
-                }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text("Favorited Events")
+                            .modifier(TitleModifier())
+                    }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton().modifier(ButtonModifier())
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton().modifier(ButtonModifier())
+                    }
                 }
+                .shadow(radius: 15)
             }
         }
         .environmentObject(user)
@@ -168,6 +182,10 @@ struct AddEventSheet: View {
     @State var showErrorMessage: Bool = false
     
     @Environment(\.dismiss) var dismiss
+    
+    init() {
+        UITableView.appearance().backgroundColor = .white
+    }
 
     var body: some View {
         ZStack {
@@ -270,6 +288,7 @@ struct EditEventSheet: View {
     
     init(index: Int) {
         self.index = index
+        UITableView.appearance().backgroundColor = .white
     }
 
     var body: some View {
@@ -385,6 +404,7 @@ struct InfoSheet: View {
         dateFormat.dateStyle = .short
         timeFormat.timeStyle = .short
         self.arrayType = arrayType
+        UITableView.appearance().backgroundColor = .white
     }
     
     var body: some View {
@@ -516,7 +536,7 @@ struct InfoSheet: View {
     }
 }
 
-struct Background: View {
+struct BackgroundDesign: View {
     var body: some View {
         Color.CSUFBlue()
             .ignoresSafeArea()
