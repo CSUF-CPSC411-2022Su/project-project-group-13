@@ -22,14 +22,14 @@ struct SignUpView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.blue
+                Color.CSUFBlue()
                     .ignoresSafeArea()
                 Circle()
                     .scale(1.7)
                     .foregroundColor(.white)
                 Circle()
                     .scale(1.35)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.CSUFOrange())
                 VStack {
                     Text("FullertonEats")
                         .font(.largeTitle)

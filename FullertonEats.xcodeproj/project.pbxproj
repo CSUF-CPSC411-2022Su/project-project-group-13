@@ -113,12 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				7A7DA39E286961B800091BE3 /* ContentView.swift */,
-				2CF0D2A6285484900018F602 /* Services.swift */,
-				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				7A7DA39828695CCB00091BE3 /* SignUpView.swift */,
 				2CF0D2A6285484900018F602 /* Services.swift */,
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
-				2CA75B6728514BEA00065454 /* ContentView.swift */,
 				2C165A19285C324B00A2A062 /* ServiceViews.swift */,
 				2C165A1B285C3C3100A2A062 /* Modifiers.swift */,
 				2C1EF29A285D84FE00235CDA /* Extensions.swift */,
@@ -297,7 +294,6 @@
 				2C165A1A285C324C00A2A062 /* ServiceViews.swift in Sources */,
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
-				2CA75B6828514BEA00065454 /* ContentView.swift in Sources */,
 				2CF0D2A7285484900018F602 /* Services.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
 				2CFD6E83285EC0B9006688A1 /* User.swift in Sources */,
@@ -459,7 +455,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FullertonEats/Preview Content\"";
-				DEVELOPMENT_TEAM = GP8Z3FS8XZ;
+				DEVELOPMENT_TEAM = VN7NG2YWMP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
