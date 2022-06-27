@@ -3,31 +3,36 @@
 //  FullertonEats
 //
 //  Created by Eric Chu on 6/8/22.
-//
+//New pull today 
 
 import SwiftUI
 
 struct ContentView: View {
+    @State var searchString: String = ""
+    @StateObject var finder = FoodFinder()
+    
     var body: some View {
-        // NavigationView {
-        // @StateObject var singleAddress = Address (place: "" , //phone: "", openTime: "", closeTime: "")
-        VStack {
-            NavigationView {
-                NavigationLink(destination: firstView())
-                {
-                    Text ("Start to search ")
-                }
+        VStack (alignment: .leading) {
+            TextField("Find Food Location ", text: $searchString)
+                .modifier(TextEntry())
+            
+            Button(action: {
+                finder.find(searchString)
+            }) {
+                Label("Search", systemImage: "magnifyingglass.circle.fill")
             }
-            // second Vstack
-            // GeometryReader { geometry in
-            NavigationView {
-                NavigationLink(destination: informationView())
-                {
-                    Text ("See all address you selected. ")
-                }
-                //   }.frame(height: geometry.size.height/2)// Geomeotry reader end
-            } // end of NavigationView
-        }
+            .modifier(myButtonDesign())
+            .padding(.bottom, 20)
+
+            Text("Search result")
+                .font(.largeTitle)
+                .foregroundColor(Color.orange)
+            Text(finder.firstFoundName)
+                .font(.body)
+                .foregroundColor(Color.blue)
+            Image(uiImage: finder.image)
+            Spacer()
+        }.padding()
     }
 }
 
@@ -36,6 +41,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-        //ContentView()
     }
 }
