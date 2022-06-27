@@ -1,20 +1,27 @@
 //
-//  ContentView.swift
+//  SignUpView.swift
 //  FullertonEats
 //
 //  Created by Eric Chu on 6/8/22.
 //
 
+import Foundation
 import SwiftUI
 
-struct ContentView: View {
-    @State private var usernameS = ""
-    @State private var passwordS = ""
-    @State private var emailS = ""
-    
+struct SignUpView: View {
+    @State private var usernameS: String = ""
+    @State private var passwordS: String = ""
+    // @StateObject var loader = UserLoader()
+    // @StateObject var user = User()
+    @State var popUpS: Bool = false
+    init() {
+        // TODO: Load the data from signup file
+        // TODO: self.user = loader.loadUser()
+    }
+
     var body: some View {
-        NavigationView{
-            ZStack{
+        NavigationView {
+            ZStack {
                 Color.blue
                     .ignoresSafeArea()
                 Circle()
@@ -23,8 +30,7 @@ struct ContentView: View {
                 Circle()
                     .scale(1.35)
                     .foregroundColor(.orange)
-                
-                VStack{
+                VStack {
                     Text("FullertonEats")
                         .font(.largeTitle)
                         .bold()
@@ -43,28 +49,46 @@ struct ContentView: View {
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
-                    TextField("Email", text: $emailS)
-                        .padding()
-                        .frame(width: 300, height: 50)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                    NavigationLink(destination: SavedEvents()){ // Reroute this to login page after displaying "Account Created"
-                    Button("signup"){
+                    Button("signup") { // Implement file creation & write
+                        self.usernameS = usernameS
+                        self.passwordS = passwordS
+                        // loader.saveUser()
+                        popUpS.toggle()
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
-                    }
                 }
+                SignUp_Notify(signUpPop: $popUpS)
             }
             .navigationBarHidden(true)
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SignUp_Notify: View {
+    @Binding var signUpPop: Bool
+    var body: some View {
+        ZStack {
+            if signUpPop {
+                VStack {
+                    Text("Account Created")
+                        .frame(width: 200, height: 50)
+                        .foregroundColor(Color.black)
+                        .font(.system(size: 15))
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                    // TODO: NavigationLink()  Route to login page
+                }
+            }
+        }
+    }
+}
+
+struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SignUpView()
     }
 }
