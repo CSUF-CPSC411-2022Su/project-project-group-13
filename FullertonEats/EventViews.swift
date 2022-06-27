@@ -574,7 +574,7 @@ struct ErrorMessage: View {
                 }
                 .frame(maxWidth: 300)
                 .background(.white)
-                .cornerRadius(15)
+                .cornerRadius(16)
                 .shadow(radius: 5)
             }
         }
