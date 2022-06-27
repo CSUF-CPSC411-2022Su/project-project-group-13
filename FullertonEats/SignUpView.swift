@@ -47,6 +47,10 @@ struct SignUpView: View {
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
+            
+                    NavigationLink(destination: LoginScreenView()) {
+                        Text("Log in here")
+                    }
                 }
                 SignUp_Notify(signUpPop: $popUpS)
             }

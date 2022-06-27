@@ -79,7 +79,7 @@ struct Login_Notify: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
 
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: HomePage()) {
                         Text("Homepage")
                             .frame(maxWidth: .infinity)
                             .frame(height: 50, alignment: .center)
