@@ -17,8 +17,14 @@ extension Color {
     }
 }
 
-extension Service: Hashable {
-    static func == (lhs: Service, rhs: Service) -> Bool {
+extension Date {
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+}
+
+extension Event: Hashable {
+    static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.label == rhs.label &&
             lhs.desc == rhs.desc &&
             lhs.address == rhs.address &&
@@ -37,8 +43,5 @@ extension Service: Hashable {
     }
 }
 
-extension Date {
-    static func - (lhs: Date, rhs: Date) -> TimeInterval {
-        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-    }
-}
+
+
