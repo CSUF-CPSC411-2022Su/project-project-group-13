@@ -21,7 +21,6 @@
 		2CF0D2A7285484900018F602 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Services.swift */; };
 		2CFD6E83285EC0B9006688A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6E82285EC0B9006688A1 /* User.swift */; };
 		7A7DA39928695CCB00091BE3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7DA39828695CCB00091BE3 /* SignUpView.swift */; };
-		7A7DA39D28695F6200091BE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7DA39C28695F6200091BE3 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +58,6 @@
 		2CF0D2A6285484900018F602 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		2CFD6E82285EC0B9006688A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A7DA39828695CCB00091BE3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		7A7DA39C28695F6200091BE3 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +113,6 @@
 				2CF0D2A6285484900018F602 /* Services.swift */,
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				7A7DA39828695CCB00091BE3 /* SignUpView.swift */,
-				7A7DA39C28695F6200091BE3 /* ContentView.swift */,
 				2C165A19285C324B00A2A062 /* ServiceViews.swift */,
 				2C165A1B285C3C3100A2A062 /* Modifiers.swift */,
 				2C1EF29A285D84FE00235CDA /* Extensions.swift */,
@@ -288,7 +285,6 @@
 				2C165A1A285C324C00A2A062 /* ServiceViews.swift in Sources */,
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
-				7A7DA39D28695F6200091BE3 /* ContentView.swift in Sources */,
 				2CF0D2A7285484900018F602 /* Services.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
 				2CFD6E83285EC0B9006688A1 /* User.swift in Sources */,
