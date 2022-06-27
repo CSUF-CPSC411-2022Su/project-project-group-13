@@ -23,3 +23,12 @@ struct ButtonModifier: ViewModifier {
     }
 }
 
+struct TitleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 25))
+            .font(.headline)
+            .foregroundColor(.white)
+    }
+}
+
