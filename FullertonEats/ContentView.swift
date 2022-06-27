@@ -24,19 +24,23 @@ struct ContentView: View {
             .modifier(myButtonDesign())
             .padding(.bottom, 20)
 
-            Text("Search result")
+            Label("Search result", systemImage: "takeoutbag.and.cup.and.straw.fill")
+                .imageScale(.small)
                 .font(.largeTitle)
                 .foregroundColor(Color.orange)
+                .frame(maxWidth: .infinity, alignment: .center)
+            
+            Image(uiImage: finder.image)
+                .frame(maxWidth: .infinity, alignment: .center)
+            
             Text(finder.firstFoundName)
                 .font(.body)
                 .foregroundColor(Color.blue)
-            Image(uiImage: finder.image)
+                .frame(maxWidth: .infinity, alignment: .center)
             Spacer()
         }.padding()
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

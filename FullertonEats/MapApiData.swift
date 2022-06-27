@@ -3,7 +3,7 @@
 //  FullertonEats
 //
 //  Created by csuftitan on 6/26/22.
-//
+//  Edit by Jiu Lin on 6/26/22
 
 import Foundation
 import SwiftUI
