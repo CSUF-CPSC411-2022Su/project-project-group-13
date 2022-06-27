@@ -12,6 +12,7 @@ struct FullertonEatsApp: App {
     var body: some Scene {
         WindowGroup {
             SignUpView()
+            //ServiceView()
         }
     }
 }
