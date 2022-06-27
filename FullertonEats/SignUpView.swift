@@ -80,6 +80,7 @@ struct SignUp_Notify: View {
                         .background(Color.white)
                         .cornerRadius(10)
                         .shadow(radius: 5)
+                        Text("Good job")
                     // TODO: NavigationLink()  Route to login page
                 }
             }
