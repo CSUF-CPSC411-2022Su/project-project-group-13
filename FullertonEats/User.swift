@@ -32,6 +32,7 @@ class User: ObservableObject, Codable {
         myEvents = try container.decode([Event].self, forKey: .myEvents)
     }
     
+    // sample init
     init(username: String, password: String) {
         self.username = username
         self.password = password
@@ -95,14 +96,6 @@ class User: ObservableObject, Codable {
         }
         return upcomingIndex
     }
-    
-    func assignUser(user: User) {
-        self.username = user.username
-        self.password = user.password
-        self.favoritedEvents = user.favoritedEvents
-        self.myEvents = user.myEvents
-    }
-    
 }
 
 struct UserLoader {
