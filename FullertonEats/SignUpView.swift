@@ -11,14 +11,9 @@ import SwiftUI
 struct SignUpView: View {
     @State private var usernameS: String = ""
     @State private var passwordS: String = ""
-    // @StateObject var loader = UserLoader()
-    // @StateObject var user = User()
+    var loader = UserLoader()
+    @StateObject var user = User()
     @State var popUpS: Bool = false
-    init() {
-        // TODO: Load the data from signup file
-        // TODO: self.user = loader.loadUser()
-    }
-
     var body: some View {
         NavigationView {
             ZStack {
@@ -52,7 +47,7 @@ struct SignUpView: View {
                     Button("signup") { // Implement file creation & write
                         self.usernameS = usernameS
                         self.passwordS = passwordS
-                        // loader.saveUser()
+                        loader.saveUser(user: user)
                         popUpS.toggle()
                     }
                     .foregroundColor(.white)
