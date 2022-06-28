@@ -33,7 +33,11 @@ struct Navigator: View {
                     Image(systemName: "heart.text.square.fill")
                     Text("Favorited Events")
                 }
-            // Insert View here
+            mapView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+                }
         }
         .background(.white)
         .hiddenNavigationBarStyle()
