@@ -51,11 +51,11 @@ class FoodFinder: ObservableObject {
                             self.firstFoundName = result.features[0].place_name
 
                             // TODO: Retrieve the first value in the center property and store in long
-                            //let long = 0.0 // Replace 0.0 with code
+                            // let long = 0.0 // Replace 0.0 with code
                             let long = result.features[0].center[0]
 
                             // TODO: Retrieve the second value in the center property and store in lat *
-                            //let lat = 0.0 // Replace 0.0 with code
+                            // let lat = 0.0 // Replace 0.0 with code
                             let lat = result.features[0].center[1]
 
                             self.loadMapImage(long: long, lat: lat)
@@ -93,7 +93,3 @@ class FoodFinder: ObservableObject {
         }
     }
 }
-
-
-
-

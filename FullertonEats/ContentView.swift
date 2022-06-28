@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var searchString: String = ""
     @StateObject var finder = FoodFinder()
-    
+    @SceneStorage("searchString") var searchString: String = ""
+
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack(alignment: .leading) {
             TextField("Find Food Location ", text: $searchString)
                 .modifier(TextEntry())
-            
+
             Button(action: {
                 finder.find(searchString)
             }) {
@@ -29,14 +29,35 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .foregroundColor(Color.orange)
                 .frame(maxWidth: .infinity, alignment: .center)
-            
+
             Image(uiImage: finder.image)
                 .frame(maxWidth: .infinity, alignment: .center)
-            
+
             Text(finder.firstFoundName)
                 .font(.body)
                 .foregroundColor(Color.blue)
                 .frame(maxWidth: .infinity, alignment: .center)
+
+            NavigationView {
+                NavigationLink(destination: firstView()) {
+                    Text("Next page")
+                    // firstView()
+                }
+            }
+
+            Spacer()
+        }.padding()
+    }
+}
+
+struct firstView: View {
+    @State var address: String = ""
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Welcome to use our app")
+                .foregroundColor(.orange)
+
             Spacer()
         }.padding()
     }
