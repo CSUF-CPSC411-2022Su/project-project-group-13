@@ -107,7 +107,8 @@ struct MyEventsView: View {
 }
 
 struct FavoritedEventsView: View {
-    @EnvironmentObject var user: User
+    //@EnvironmentObject var user: User
+    @StateObject var user = User(username: "", password: "")
     @State var showingInfoSheet = false
     
     init() {
@@ -119,12 +120,10 @@ struct FavoritedEventsView: View {
             BackgroundDesign()
             VStack {
                 HStack {
-                    Text("   ")
-                        .padding(.leading, 20)
-                    
                     Spacer()
-                    
-                    Text("My Events")
+                        .frame(width: 106)
+                        
+                    Text("Favorited Events")
                         .modifier(TitleModifier())
                     Spacer()
                     
@@ -586,9 +585,7 @@ struct ErrorMessage: View {
 
 struct EventsForm_Previews: PreviewProvider {
     static var previews: some View {
-        MyEventsView()
-        // FavoritedEventsView()
-        
-        // NavBar()
+        //MyEventsView()
+        FavoritedEventsView()
     }
 }
