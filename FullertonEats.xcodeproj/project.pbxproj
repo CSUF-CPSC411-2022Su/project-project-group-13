@@ -20,10 +20,12 @@
 		2CA75B9228514DB600065454 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 2CA75B9128514DB600065454 /* .gitattributes */; };
 		2CF0D2A7285484900018F602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0D2A6285484900018F602 /* Event.swift */; };
 		2CFD6E83285EC0B9006688A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD6E82285EC0B9006688A1 /* User.swift */; };
+		7A543238286AD9D000997D2C /* mapAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A543237286AD9D000997D2C /* mapAPIData.swift */; };
 		7A7DA39928695CCB00091BE3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7DA39828695CCB00091BE3 /* SignUpView.swift */; };
 		7A7DA39F286961B800091BE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7DA39E286961B800091BE3 /* ContentView.swift */; };
 		7A9B8F87285EAD3500121759 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B8F86285EAD3500121759 /* LoginScreenView.swift */; };
 		7A9BC414286A6DB800DB5157 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9BC413286A6DB800DB5157 /* HomePage.swift */; };
+		7AD4F7AA286ADA76008F98A7 /* mapAPI_feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD4F7A9286ADA76008F98A7 /* mapAPI_feature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,10 +62,12 @@
 		2CA75B9128514DB600065454 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		2CF0D2A6285484900018F602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2CFD6E82285EC0B9006688A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7A543237286AD9D000997D2C /* mapAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAPIData.swift; sourceTree = "<group>"; };
 		7A7DA39828695CCB00091BE3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		7A7DA39E286961B800091BE3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7A9B8F86285EAD3500121759 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		7A9BC413286A6DB800DB5157 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		7AD4F7A9286ADA76008F98A7 /* mapAPI_feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAPI_feature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,15 +120,16 @@
 		2CA75B6428514BEA00065454 /* FullertonEats */ = {
 			isa = PBXGroup;
 			children = (
-				2CF0D2A6285484900018F602 /* Event.swift */,
 				7A7DA39E286961B800091BE3 /* ContentView.swift */,
 				7A7DA39828695CCB00091BE3 /* SignUpView.swift */,
-				2CF0D2A6285484900018F602 /* Events.swift */,
+				2CF0D2A6285484900018F602 /* Event.swift */,
 				2CA75B6528514BEA00065454 /* FullertonEatsApp.swift */,
 				7A9B8F86285EAD3500121759 /* LoginScreenView.swift */,
 				7A9BC413286A6DB800DB5157 /* HomePage.swift */,
 				2C165A19285C324B00A2A062 /* EventViews.swift */,
+				7AD4F7A9286ADA76008F98A7 /* mapAPI_feature.swift */,
 				2C165A1B285C3C3100A2A062 /* Modifiers.swift */,
+				7A543237286AD9D000997D2C /* mapAPIData.swift */,
 				2C1EF29A285D84FE00235CDA /* Extensions.swift */,
 				2CFD6E82285EC0B9006688A1 /* User.swift */,
 				2CA75B6928514BEE00065454 /* Assets.xcassets */,
@@ -298,17 +303,18 @@
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
 				7A7DA39F286961B800091BE3 /* ContentView.swift in Sources */,
-				2CF0D2A7285484900018F602 /* Events.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Event.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
+				7AD4F7AA286ADA76008F98A7 /* mapAPI_feature.swift in Sources */,
 				2C165A1A285C324C00A2A062 /* EventViews.swift in Sources */,
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
-				2CF0D2A7285484900018F602 /* Events.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Event.swift in Sources */,
+				7A543238286AD9D000997D2C /* mapAPIData.swift in Sources */,
 				2C165A1A285C324C00A2A062 /* EventViews.swift in Sources */,
 				2C1EF29B285D84FE00235CDA /* Extensions.swift in Sources */,
 				2C165A1C285C3C3100A2A062 /* Modifiers.swift in Sources */,
-				2CF0D2A7285484900018F602 /* Events.swift in Sources */,
-				2CA75B6828514BEA00065454 /* ContentView.swift in Sources */,
+				2CF0D2A7285484900018F602 /* Event.swift in Sources */,
 				2CF0D2A7285484900018F602 /* Event.swift in Sources */,
 				2CA75B6628514BEA00065454 /* FullertonEatsApp.swift in Sources */,
 				7A9BC414286A6DB800DB5157 /* HomePage.swift in Sources */,
