@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct BottomNavBar: View {
+struct Navigator: View {
+    @EnvironmentObject var user: User
+
     init() {
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().backgroundColor = .white
@@ -23,21 +25,28 @@ struct BottomNavBar: View {
                 }
             MyEventsView()
                 .tabItem {
+                    Image(systemName: "square.text.square.fill")
                     Text("My Events")
                 }
-            ContentView()
+            FavoritedEventsView()
                 .tabItem {
-                    Text("Services")
+                    Image(systemName: "heart.text.square.fill")
+                    Text("Favorited Events")
                 }
+            // Insert View here
         }
         .background(.white)
+        .hiddenNavigationBarStyle()
     }
 }
 
 struct HomePage: View {
+    @EnvironmentObject var user: User
+
     var body: some View {
         ZStack {
             BackgroundDesign()
         }
+        .hiddenNavigationBarStyle()
     }
 }

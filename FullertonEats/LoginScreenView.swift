@@ -13,16 +13,9 @@ struct LoginScreenView: View {
     @SceneStorage("password") var password = ""
     @StateObject var user = User()
     @State var loginNotify: Bool = false
-    var userLoader = UserLoader()
+    @State var isNavBarHidden: Bool = true
     
-    init() {
-        if let loaderUser = userLoader.loadUser() {
-            user.username = loaderUser.username
-            user.password = loaderUser.password
-            user.favoritedEvents = loaderUser.favoritedEvents
-            user.myEvents = loaderUser.myEvents
-        }
-    }
+    var userLoader = UserLoader()
     
     var body: some View {
         NavigationView {
@@ -50,10 +43,22 @@ struct LoginScreenView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                 
-                    Button("login") {
-                        if user.username==username, user.password==password {
+                    Button("Login") {
+                        if let loadedUser = userLoader.loadUser() {
+                            user.assign(loadedUser)
+                        }
+                        
+                        if user.username == username, user.password == password {
                             loginNotify.toggle()
                         }
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 50)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                
+                    NavigationLink(destination: SignUpView()) {
+                        Text("Sign Up")
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
@@ -63,7 +68,13 @@ struct LoginScreenView: View {
                 Login_Notify(login: $loginNotify)
             }
         }
-        .navigationBarHidden(true)
+        .environmentObject(user)
+        .navigationBarTitle("")
+        .navigationBarHidden(self.isNavBarHidden)
+        .onAppear {
+            self.isNavBarHidden = true
+        }
+        
     }
 }
     
@@ -79,7 +90,7 @@ struct Login_Notify: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
 
-                    NavigationLink(destination: HomePage()) {
+                    NavigationLink(destination: Navigator()) {
                         Text("Homepage")
                             .frame(maxWidth: .infinity)
                             .frame(height: 50, alignment: .center)

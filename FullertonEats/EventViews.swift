@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MyEventsView: View {
-    // change to environment object once merged
-    @StateObject var user = User(username: "user", password: "pw")
+    @EnvironmentObject var user: User
     @State var showingAddEventSheet = false
     @State var showingEditEventSheet = false
     @State var showingInfoSheet = false
@@ -19,9 +18,24 @@ struct MyEventsView: View {
     }
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                BackgroundDesign()
+        ZStack {
+            BackgroundDesign()
+            
+            VStack {
+                HStack {
+                    addButton
+                        .padding(.leading, 20)
+                    
+                    Spacer()
+                    
+                    Text("My Events")
+                        .modifier(TitleModifier())
+                    Spacer()
+                    
+                    editButton
+                        .padding(.trailing, 20)
+                }
+                
                 List {
                     ForEach(Array(self.user.myEvents.enumerated()), id: \.1) { index, event in
                         HStack {
@@ -62,25 +76,10 @@ struct MyEventsView: View {
                         user.myEvents.move(fromOffsets: offset, toOffset: index)
                     }
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        addButton
-                    }
-                
-                    ToolbarItem(placement: .principal) {
-                        Text("My Events")
-                            .modifier(TitleModifier())
-                    }
-                
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        editButton
-                    }
-                }
                 .shadow(radius: 15)
             }
         }
-        .environmentObject(user)
-        .navigationBarBackButtonHidden(true)
+        .hiddenNavigationBarStyle()
     }
     
     var addButton: some View {
@@ -108,7 +107,7 @@ struct MyEventsView: View {
 }
 
 struct FavoritedEventsView: View {
-    @StateObject var user = User(username: "user", password: "pw")
+    @EnvironmentObject var user: User
     @State var showingInfoSheet = false
     
     init() {
@@ -116,9 +115,24 @@ struct FavoritedEventsView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                BackgroundDesign()
+        ZStack {
+            BackgroundDesign()
+            VStack {
+                HStack {
+                    Text("   ")
+                        .padding(.leading, 20)
+                    
+                    Spacer()
+                    
+                    Text("My Events")
+                        .modifier(TitleModifier())
+                    Spacer()
+                    
+                    EditButton()
+                        .modifier(ButtonModifier())
+                        .padding(.trailing, 20)
+                }
+                
                 List {
                     ForEach(Array(self.user.favoritedEvents.enumerated()), id: \.1) { index, event in
                         HStack {
@@ -153,21 +167,10 @@ struct FavoritedEventsView: View {
                         user.favoritedEvents.move(fromOffsets: offset, toOffset: index)
                     }
                 }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text("Favorited Events")
-                            .modifier(TitleModifier())
-                    }
-                
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton().modifier(ButtonModifier())
-                    }
-                }
                 .shadow(radius: 15)
             }
         }
-        .environmentObject(user)
-        .navigationBarBackButtonHidden(true)
+        .hiddenNavigationBarStyle()
     }
 }
 
@@ -541,10 +544,10 @@ struct BackgroundDesign: View {
         Color.CSUFBlue()
             .ignoresSafeArea()
         Circle()
-            .scale(1.7)
+            .scale(1.5)
             .foregroundColor(.white)
         Circle()
-            .scale(1.35)
+            .scale(1.25)
             .foregroundColor(Color.CSUFOrange())
     }
 }
@@ -583,7 +586,9 @@ struct ErrorMessage: View {
 
 struct EventsForm_Previews: PreviewProvider {
     static var previews: some View {
-        //MyEventsView()
-        FavoritedEventsView()
+        MyEventsView()
+        // FavoritedEventsView()
+        
+        // NavBar()
     }
 }
