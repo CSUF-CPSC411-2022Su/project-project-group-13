@@ -440,17 +440,17 @@ struct InfoSheet: View {
                 Section(header: Text("Address").modifier(HeaderModifier())) {
                     Text(user.myEvents[index].address)
                     
-                    // Image placeholder
-                    Image(systemName: "compass.drawing")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 300, height: 300, alignment: .center)
-                        .clipShape(Rectangle())
-                        .overlay(Rectangle()
-                            .frame(width: 300, height: 300)
-                            .foregroundColor(Color.white)
-                        )
-                        .shadow(radius: 5)
+//                    // Image placeholder
+//                    Image(systemName: "compass.drawing")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 300, height: 300, alignment: .center)
+//                        .clipShape(Rectangle())
+//                        .overlay(Rectangle()
+//                            .frame(width: 300, height: 300)
+//                            .foregroundColor(Color.white)
+//                        )
+//                        .shadow(radius: 5)
                 }
                 
                 Section(header: Text("Date").modifier(HeaderModifier())) {
