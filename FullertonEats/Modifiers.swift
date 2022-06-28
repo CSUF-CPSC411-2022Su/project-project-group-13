@@ -32,6 +32,15 @@ struct TitleModifier: ViewModifier {
     }
 }
 
+struct HiddenNavigationBar: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+    }
+}
+
 
 //Jiu Lin' struct
 struct TextEntry: ViewModifier {

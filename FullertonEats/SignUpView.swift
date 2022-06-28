@@ -11,50 +11,48 @@ import SwiftUI
 struct SignUpView: View {
     @SceneStorage("usernameS") private var usernameS: String = ""
     @SceneStorage("passwordS") private var passwordS: String = ""
-    var loader = UserLoader()
-    @StateObject var user = User()
+    @EnvironmentObject var user: User
     @State var popUpS: Bool = false
+
+    var loader = UserLoader()
+
     var body: some View {
-        NavigationView {
-            ZStack {
-                BackgroundDesign()
-                VStack {
-                    Text("FullertonEats")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding()
-                    Text("Sign Up")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding()
-                    TextField("Username", text: $usernameS)
-                        .padding()
-                        .frame(width: 300, height: 50)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                    TextField("Password", text: $passwordS)
-                        .padding()
-                        .frame(width: 300, height: 50)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                    Button("signup") { // Implement file creation & write
-                        self.usernameS = usernameS
-                        self.passwordS = passwordS
+        ZStack {
+            BackgroundDesign()
+            VStack {
+                Text("FullertonEats")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+                Text("Sign Up")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+                TextField("Username", text: $usernameS)
+                    .padding()
+                    .frame(width: 300, height: 50)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                TextField("Password", text: $passwordS)
+                    .padding()
+                    .frame(width: 300, height: 50)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                Button("signup") {
+                    if !usernameS.isEmpty, !passwordS.isEmpty {
+                        user.username = usernameS
+                        user.password = passwordS
                         loader.saveUser(user: user)
                         popUpS.toggle()
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 300, height: 50)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            
-                    NavigationLink(destination: LoginScreenView()) {
-                        Text("Log in here")
-                    }
                 }
-                SignUp_Notify(signUpPop: $popUpS)
+                .foregroundColor(.white)
+                .frame(width: 300, height: 50)
+                .background(Color.blue)
+                .cornerRadius(10)
             }
-            .navigationBarHidden(true)
+
+            SignUp_Notify(signUpPop: $popUpS)
         }
     }
 }
@@ -71,8 +69,10 @@ struct SignUp_Notify: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
 
-                    NavigationLink(destination: LoginScreenView()) {
-                        Text("Login")
+                    Button(action: {
+                        signUpPop = false
+                    }) {
+                        Text("Ok")
                             .frame(maxWidth: .infinity)
                             .frame(height: 50, alignment: .center)
                             .foregroundColor(.white)
