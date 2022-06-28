@@ -20,7 +20,6 @@ struct MyEventsView: View {
     var body: some View {
         ZStack {
             BackgroundDesign()
-            
             VStack {
                 HStack {
                     addButton
@@ -30,6 +29,7 @@ struct MyEventsView: View {
                     
                     Text("My Events")
                         .modifier(TitleModifier())
+                    
                     Spacer()
                     
                     editButton
@@ -107,8 +107,7 @@ struct MyEventsView: View {
 }
 
 struct FavoritedEventsView: View {
-    //@EnvironmentObject var user: User
-    @StateObject var user = User(username: "", password: "")
+    @EnvironmentObject var user: User
     @State var showingInfoSheet = false
     
     init() {
@@ -125,6 +124,7 @@ struct FavoritedEventsView: View {
                         
                     Text("Favorited Events")
                         .modifier(TitleModifier())
+                    
                     Spacer()
                     
                     EditButton()
@@ -585,7 +585,7 @@ struct ErrorMessage: View {
 
 struct EventsForm_Previews: PreviewProvider {
     static var previews: some View {
-        //MyEventsView()
+        // MyEventsView()
         FavoritedEventsView()
     }
 }
