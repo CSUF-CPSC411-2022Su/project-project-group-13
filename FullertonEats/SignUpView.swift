@@ -11,7 +11,7 @@ import SwiftUI
 struct SignUpView: View {
     @SceneStorage("usernameS") private var usernameS: String = ""
     @SceneStorage("passwordS") private var passwordS: String = ""
-    @StateObject var user = User()
+    @EnvironmentObject var user: User
     @State var popUpS: Bool = false
 
     var loader = UserLoader()
@@ -38,7 +38,7 @@ struct SignUpView: View {
                     .frame(width: 300, height: 50)
                     .background(Color.white)
                     .cornerRadius(10)
-                Button("signup") {
+                Button("Create Account") {
                     if !usernameS.isEmpty, !passwordS.isEmpty {
                         user.username = usernameS
                         user.password = passwordS

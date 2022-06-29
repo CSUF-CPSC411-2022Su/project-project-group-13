@@ -72,15 +72,26 @@ struct HomePage: View {
 
             VStack(alignment: .leading) {
                 Text("Upcoming Events")
+                    .padding()
                     .foregroundColor(.white)
-                    .font(.title)
+                    .font(.largeTitle)
                     .shadow(radius: 5)
-
+                
+                Text("My Events")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .shadow(radius: 5)
+                
                 if user.myEvents.count > 0 {
                     EventView(text: myEventLabel, address: myEventAddress, date: myEventDate)
                 } else {
                     EventView(text: emptyMyEvent, address: "", date: "")
                 }
+                
+                Text("Favorited Events")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .shadow(radius: 5)
 
                 if user.favoritedEvents.count > 0 {
                     EventView(text: favEventLabel, address: favEventAddress, date: favEventDate)

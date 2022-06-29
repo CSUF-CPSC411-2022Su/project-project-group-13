@@ -19,6 +19,11 @@ class User: ObservableObject, Codable {
     
     init() {}
     
+    init(username: String, password: String) {
+        self.username = username
+        self.password = password
+    }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -68,14 +73,14 @@ class User: ObservableObject, Codable {
     // Helper function, returns the upcoming event from an Event array
     private func getUpcoming(eventArr: [Event]) -> Event {
         var upcomingIndex = 0
-        var min = 0.0
+        var max = 0.0
         
-        min = Date.now - eventArr[0].date
+        max = Date.now - eventArr[0].date
         for i in 1 ... eventArr.count - 1 {
             let temp = Date.now - eventArr[i].date
             
-            if temp < min {
-                min = temp
+            if temp >= max {
+                max = temp
                 upcomingIndex = i
             }
         }

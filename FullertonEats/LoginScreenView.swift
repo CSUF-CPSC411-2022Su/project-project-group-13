@@ -11,10 +11,10 @@ import SwiftUI
 struct LoginScreenView: View {
     @SceneStorage("username") var username = ""
     @SceneStorage("password") var password = ""
+    @StateObject var user = User()
     @State var showingErrorMessage = false
     @State var errorMessage = ""
     @State var isLoginSucessful = false
-    @StateObject var user = User()
     
     var userLoader = UserLoader()
     
@@ -47,15 +47,22 @@ struct LoginScreenView: View {
                     NavigationLink(destination: Navigator(user: user), isActive: $isLoginSucessful) {
                         EmptyView()
                     }
+                    .padding(.vertical, 5)
                 
                     Button("Login") {
-                        if !username.isEmpty, !password.isEmpty, let loadedUser = userLoader.loadUser() {
-                            if loadedUser.username == username, loadedUser.password == password {
-                                isLoginSucessful = true
-                                user.assign(loadedUser)
+                        if !username.isEmpty, !password.isEmpty {
+                            if let loadedUser = userLoader.loadUser() {
+                                // Retrieve login credentials from file
+                                if loadedUser.username == username, loadedUser.password == password {
+                                    isLoginSucessful = true
+                                    user.assign(loadedUser)
+                                } else {
+                                    showingErrorMessage.toggle()
+                                    errorMessage = "Incorrect username or password!"
+                                }
                             } else {
                                 showingErrorMessage.toggle()
-                                errorMessage = "Incorrect username or password!"
+                                errorMessage = "The account does not exist!"
                             }
                         } else {
                             showingErrorMessage.toggle()
@@ -79,6 +86,7 @@ struct LoginScreenView: View {
                 LoginError(isActive: $showingErrorMessage, errorMessage: $errorMessage)
             }
         }
+        .environmentObject(user)
         .hiddenNavigationBarStyle()
     }
 }
