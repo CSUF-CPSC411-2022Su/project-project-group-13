@@ -8,7 +8,6 @@
 import SwiftUI
 
 class User: ObservableObject, Codable {
-    
     enum CodingKeys: CodingKey {
         case username, password, favoritedEvents, myEvents
     }
@@ -18,7 +17,7 @@ class User: ObservableObject, Codable {
     @Published var favoritedEvents: [Event] = []
     @Published var myEvents: [Event] = []
     
-    init() {    }
+    init() {}
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -35,9 +34,9 @@ class User: ObservableObject, Codable {
         self.password = password
     
 //        myEvents.append(Event(label: "Hot Dogs", desc: "Free hot dogs! With condiments.", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-//        
+//
 //        myEvents.append(Event(label: "Burgers", desc: "Vegan burgers!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-//        
+//
 //        myEvents.append(Event(label: "Tacos", desc: "Beef or chicken!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
         favoritedEvents.append(Event(label: "Bread and Water", desc: "All types of bread and water", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
@@ -45,7 +44,6 @@ class User: ObservableObject, Codable {
         favoritedEvents.append(Event(label: "Soup", desc: "Tomato and chicken noodle soup!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
         favoritedEvents.append(Event(label: "Fruits", desc: "All types of fruit served here!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-        
     }
     
     func encode(to encoder: Encoder) throws {
@@ -59,34 +57,34 @@ class User: ObservableObject, Codable {
     
     // assign a loaded user to this user
     func assign(_ loadedUser: User) {
-        self.username = loadedUser.username
-        self.password = loadedUser.password
-        self.favoritedEvents = loadedUser.favoritedEvents
-        self.myEvents = loadedUser.myEvents
+        username = loadedUser.username
+        password = loadedUser.password
+        favoritedEvents = loadedUser.favoritedEvents
+        myEvents = loadedUser.myEvents
     }
     
-    // returns the index of the upcoming event from favoritedEvents
-    func getUpcomingFavoriteEvent() -> Int? {
+    // returns the upcoming event from favoritedEvents
+    func getUpcomingFavoriteEvent() -> Event? {
         if favoritedEvents.count == 0 {
             return nil
         } else if favoritedEvents.count == 1 {
-            return 1
+            return favoritedEvents[0]
         }
         return getUpcoming(eventArr: favoritedEvents)
     }
     
-    // returns the index of the upcoming event from myEvents
-    func getUpcomingMyEvent() -> Int? {
+    // returns the upcoming event from myEvents
+    func getUpcomingMyEvent() -> Event? {
         if myEvents.count == 0 {
             return nil
         } else if myEvents.count == 1 {
-            return 1
+            return myEvents[0]
         }
         return getUpcoming(eventArr: myEvents)
     }
     
-    // Helper function, returns the index of the upcoming event from an Event array
-    private func getUpcoming(eventArr: [Event]) -> Int {
+    // Helper function, returns the upcoming event from an Event array
+    private func getUpcoming(eventArr: [Event]) -> Event {
         var upcomingIndex = 0
         var min = 0.0
         
@@ -99,13 +97,12 @@ class User: ObservableObject, Codable {
                 upcomingIndex = i
             }
         }
-        return upcomingIndex
+        return eventArr[upcomingIndex]
     }
 }
 
 class UserLoader {
     var userInfoURL: URL
-    
     
     init() {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -113,7 +110,7 @@ class UserLoader {
     }
     
     // call this function to load user
-    func loadUser() -> User?{
+    func loadUser() -> User? {
         let propertyListDecoder = PropertyListDecoder()
         if let retrieveUser = try? Data(contentsOf: userInfoURL), let decodedUser = try? propertyListDecoder.decode(User.self, from: retrieveUser) {
             return decodedUser

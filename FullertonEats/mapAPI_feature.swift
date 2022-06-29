@@ -75,45 +75,43 @@ struct infoo: View {
 
 struct nextPage: View {
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    heartShape()
-                        .fill(.blue)
-                        .frame(width: 15, height: 15)
-                    Text("Some More Info Coming Soon...")
-                        .foregroundColor(Color.gray)
-                        .font(.title3)
-                    heartShape()
-                        .fill(.blue)
-                        .frame(width: 15, height: 15)
-                }
-
-                // List Session View
-                List {
-                    Section(header: Text("Note")) {
-                        NavigationLink(destination: detailInfo()) {
-                            Text("Traveling Note").foregroundColor(Color.blue)
-                        }
-                    }
-                    Section(header: Text("Services")) {
-                        NavigationLink(destination: Text("No services provided. ")) {
-                            Text("Services").foregroundColor(Color.blue)
-                        }
-                        DisclosureGroup(content: {
-                            NavigationLink(destination: Text("123-456-789")) {
-                                Text("Phone").foregroundColor(Color.blue)
-                            }
-                            NavigationLink(destination: Text("place_123.gmail.com")) {
-                                Text("Email").foregroundColor(Color.blue)
-                            }
-                        }) {
-                            Text("Helps")
-                        }
-                    }
-                }
-                Spacer()
+        VStack {
+            HStack {
+                heartShape()
+                    .fill(.blue)
+                    .frame(width: 15, height: 15)
+                Text("Some More Info Coming Soon...")
+                    .foregroundColor(Color.gray)
+                    .font(.title3)
+                heartShape()
+                    .fill(.blue)
+                    .frame(width: 15, height: 15)
             }
+
+            // List Session View
+            List {
+                Section(header: Text("Note")) {
+                    NavigationLink(destination: detailInfo()) {
+                        Text("Traveling Note").foregroundColor(Color.blue)
+                    }
+                }
+                Section(header: Text("Services")) {
+                    NavigationLink(destination: Text("No services provided. ")) {
+                        Text("Services").foregroundColor(Color.blue)
+                    }
+                    DisclosureGroup(content: {
+                        NavigationLink(destination: Text("123-456-789")) {
+                            Text("Phone").foregroundColor(Color.blue)
+                        }
+                        NavigationLink(destination: Text("place_123.gmail.com")) {
+                            Text("Email").foregroundColor(Color.blue)
+                        }
+                    }) {
+                        Text("Helps")
+                    }
+                }
+            }
+            Spacer()
         }
     }
 }
@@ -137,28 +135,26 @@ struct detailInfo: View {
     @SceneStorage("note") var note: String = ""
 
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    heartShape()
-                        .fill(.blue)
-                        .frame(width: 25, height: 20)
-                    Text("Nice Location Note:  ")
-                        .font(.title3)
-                        .bold()
-                        .foregroundColor(Color.blue)
-                    heartShape()
-                        .fill(.blue)
-                        .frame(width: 25, height: 20)
-                }
-                TextField("Note:", text: $note)
-                    .foregroundColor(Color.black)
-                    .padding(2)
-                    .border(Color.black)
-                    .background(Color.white)
+        VStack {
+            HStack {
+                heartShape()
+                    .fill(.blue)
+                    .frame(width: 25, height: 20)
+                Text("Nice Location Note:  ")
+                    .font(.title3)
+                    .bold()
+                    .foregroundColor(Color.blue)
+                heartShape()
+                    .fill(.blue)
+                    .frame(width: 25, height: 20)
             }
-            Spacer()
+            TextField("Note:", text: $note)
+                .foregroundColor(Color.black)
+                .padding(2)
+                .border(Color.black)
+                .background(Color.white)
         }
+        Spacer()
     }
 }
 

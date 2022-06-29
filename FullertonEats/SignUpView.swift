@@ -11,7 +11,7 @@ import SwiftUI
 struct SignUpView: View {
     @SceneStorage("usernameS") private var usernameS: String = ""
     @SceneStorage("passwordS") private var passwordS: String = ""
-    @EnvironmentObject var user: User
+    @StateObject var user = User()
     @State var popUpS: Bool = false
 
     var loader = UserLoader()

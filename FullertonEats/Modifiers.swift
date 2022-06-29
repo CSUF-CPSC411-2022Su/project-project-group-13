@@ -41,8 +41,19 @@ struct HiddenNavigationBar: ViewModifier {
     }
 }
 
+struct HomePageEventModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: 300)
+            .frame(height: 80)
+            .foregroundColor(.black)
+            .background(.white)
+            .cornerRadius(15)
+            .shadow(radius: 5)
+    }
+}
 
-//Jiu Lin' struct
+// Jiu Lin' struct
 struct TextEntry: ViewModifier {
     func body(content: Content) -> some View {
         content

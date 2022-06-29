@@ -20,7 +20,6 @@ struct MyEventsView: View {
     var body: some View {
         ZStack {
             BackgroundDesign()
-            
             VStack {
                 HStack {
                     addButton
@@ -30,6 +29,7 @@ struct MyEventsView: View {
                     
                     Text("My Events")
                         .modifier(TitleModifier())
+                    
                     Spacer()
                     
                     editButton
@@ -107,8 +107,7 @@ struct MyEventsView: View {
 }
 
 struct FavoritedEventsView: View {
-    //@EnvironmentObject var user: User
-    @StateObject var user = User(username: "", password: "")
+    @EnvironmentObject var user: User
     @State var showingInfoSheet = false
     
     init() {
@@ -125,6 +124,7 @@ struct FavoritedEventsView: View {
                         
                     Text("Favorited Events")
                         .modifier(TitleModifier())
+                    
                     Spacer()
                     
                     EditButton()
@@ -182,6 +182,7 @@ struct AddEventSheet: View {
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
     @State var showErrorMessage: Bool = false
+    var loader = UserLoader()
     
     @Environment(\.dismiss) var dismiss
     
@@ -263,6 +264,7 @@ struct AddEventSheet: View {
                 let newEvent = Event(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
 
                 user.myEvents.append(newEvent)
+                loader.saveUser(user: user)
                 dismiss()
             } else {
                 showErrorMessage.toggle()
@@ -283,6 +285,7 @@ struct EditEventSheet: View {
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
     @State var showErrorMessage: Bool = false
+    var loader = UserLoader()
     
     @Environment(\.dismiss) var dismiss
     
@@ -381,6 +384,7 @@ struct EditEventSheet: View {
             if !label.isEmpty, !address.isEmpty {
                 user.myEvents[index].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
                 
+                loader.saveUser(user: user)
                 dismiss()
             } else {
                 showErrorMessage.toggle()
@@ -440,17 +444,17 @@ struct InfoSheet: View {
                 Section(header: Text("Address").modifier(HeaderModifier())) {
                     Text(user.myEvents[index].address)
                     
-                    // Image placeholder
-                    Image(systemName: "compass.drawing")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 300, height: 300, alignment: .center)
-                        .clipShape(Rectangle())
-                        .overlay(Rectangle()
-                            .frame(width: 300, height: 300)
-                            .foregroundColor(Color.white)
-                        )
-                        .shadow(radius: 5)
+//                    // Image placeholder
+//                    Image(systemName: "compass.drawing")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 300, height: 300, alignment: .center)
+//                        .clipShape(Rectangle())
+//                        .overlay(Rectangle()
+//                            .frame(width: 300, height: 300)
+//                            .foregroundColor(Color.white)
+//                        )
+//                        .shadow(radius: 5)
                 }
                 
                 Section(header: Text("Date").modifier(HeaderModifier())) {
@@ -585,7 +589,7 @@ struct ErrorMessage: View {
 
 struct EventsForm_Previews: PreviewProvider {
     static var previews: some View {
-        //MyEventsView()
+        // MyEventsView()
         FavoritedEventsView()
     }
 }
