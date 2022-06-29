@@ -83,7 +83,6 @@ struct LoginScreenView: View {
     }
 }
 
-// Created by Eric Chu
 struct LoginError: View {
     @Binding var isActive: Bool
     @Binding var errorMessage: String
@@ -104,6 +103,7 @@ struct LoginError: View {
                         Text("Ok")
                             .frame(maxWidth: .infinity)
                             .frame(height: 50, alignment: .center)
+                            .foregroundColor(.white)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .background(Color.CSUFBlue())
