@@ -38,7 +38,7 @@ struct LoginScreenView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                         
-                    TextField("Password", text: $password)
+                    SecureField("Password", text: $password)
                         .padding()
                         .frame(width: 300, height: 50)
                         .background(Color.white)

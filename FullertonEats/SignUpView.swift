@@ -33,7 +33,7 @@ struct SignUpView: View {
                     .frame(width: 300, height: 50)
                     .background(Color.white)
                     .cornerRadius(10)
-                TextField("Password", text: $passwordS)
+                SecureField("Password", text: $passwordS)
                     .padding()
                     .frame(width: 300, height: 50)
                     .background(Color.white)
