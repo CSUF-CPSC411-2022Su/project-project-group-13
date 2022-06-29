@@ -48,6 +48,7 @@ struct mapView: View {
     }
 }
 
+// Address name and location's image (decode API info view )
 struct infoo: View {
     var foodlocation: FoodLocactionInfo
     var body: some View {
@@ -63,7 +64,7 @@ struct infoo: View {
             Text(foodlocation.place_name)
                 .font(.headline)
                 .foregroundColor(Color.blue)
-            Image("map2")
+            Image("map0")
                 .frame(alignment: .center)
             NavigationLink(destination: nextPage()) {
                 Text("More Information")
@@ -73,41 +74,37 @@ struct infoo: View {
     }
 }
 
+// More information view (List view)
 struct nextPage: View {
     var body: some View {
-        VStack {
-            HStack {
-                heartShape()
-                    .fill(.blue)
-                    .frame(width: 15, height: 15)
-                Text("Some More Info Coming Soon...")
-                    .foregroundColor(Color.gray)
-                    .font(.title3)
-                heartShape()
-                    .fill(.blue)
-                    .frame(width: 15, height: 15)
-            }
+        VStack(spacing: 0) {
+            Label(" More Free Food Information Coming Soon...", systemImage: "leaf.fill")
+                .imageScale(.medium)
+                .foregroundColor(Color.gray)
+                .font(.body)
 
             // List Session View
             List {
+                // Session_1
                 Section(header: Text("Note")) {
                     NavigationLink(destination: detailInfo()) {
-                        Text("Traveling Note").foregroundColor(Color.blue)
+                        Text("Pick Up Note").foregroundColor(Color.blue)
                     }
                 }
+                // Session_2
                 Section(header: Text("Services")) {
-                    NavigationLink(destination: Text("No services provided. ")) {
-                        Text("Services").foregroundColor(Color.blue)
+                    NavigationLink(destination: Text("We provide free food pick up. More free food pick events will be posted soon. A fixed pick-up time will be Monday 8:30 am - 3:30 pm, Friday  8:30 am - 3:30 pm.")) {
+                        Text("Announcements").foregroundColor(Color.blue)
                     }
                     DisclosureGroup(content: {
                         NavigationLink(destination: Text("123-456-789")) {
                             Text("Phone").foregroundColor(Color.blue)
                         }
-                        NavigationLink(destination: Text("place_123.gmail.com")) {
+                        NavigationLink(destination: Text("place_123@gmail.com")) {
                             Text("Email").foregroundColor(Color.blue)
                         }
                     }) {
-                        Text("Helps")
+                        Text("Helps") // For DisclosureGroup
                     }
                 }
             }
@@ -116,6 +113,35 @@ struct nextPage: View {
     }
 }
 
+// Taking Note View (click "Pick UpNote" )
+struct detailInfo: View {
+    // @State var note: String = ""
+    @SceneStorage("note") var note: String = ""
+
+    var body: some View {
+        VStack {
+            HStack {
+                Label("Foods/Places Note:", systemImage: "pencil")
+                    .font(Font.title3.bold())
+                    .foregroundColor(Color(red: 0.0, green: 0.15294117647058825, blue: 0.2980392156862745))
+                    .imageScale(.large)
+
+                heartShape()
+                    .fill(.blue)
+                    .frame(width: 23, height: 19)
+            }
+
+            TextField("Note:", text: $note)
+                .foregroundColor(Color.black)
+                .padding(2)
+                .border(Color.black)
+                .background(Color.white)
+        }
+        Spacer()
+    }
+}
+
+// Self defined shape (small blue heart)
 struct heartShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -127,34 +153,6 @@ struct heartShape: Shape {
         path.addLine(to: CGPoint(x: rect.maxX / 3, y: 0)) // F
         path.addLine(to: CGPoint(x: rect.maxX / 2, y: rect.maxY / 3)) // A
         return path
-    }
-}
-
-struct detailInfo: View {
-    // @State var note: String = ""
-    @SceneStorage("note") var note: String = ""
-
-    var body: some View {
-        VStack {
-            HStack {
-                heartShape()
-                    .fill(.blue)
-                    .frame(width: 25, height: 20)
-                Text("Nice Location Note:  ")
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(Color.blue)
-                heartShape()
-                    .fill(.blue)
-                    .frame(width: 25, height: 20)
-            }
-            TextField("Note:", text: $note)
-                .foregroundColor(Color.black)
-                .padding(2)
-                .border(Color.black)
-                .background(Color.white)
-        }
-        Spacer()
     }
 }
 
