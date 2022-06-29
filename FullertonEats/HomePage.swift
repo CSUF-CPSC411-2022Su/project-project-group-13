@@ -41,7 +41,6 @@ struct Navigator: View {
         .background(.white)
         .hiddenNavigationBarStyle()
         .onAppear {
-            UITabBar.appearance().isTranslucent = false
             UITabBar.appearance().backgroundColor = .white
         }
     }
@@ -58,7 +57,7 @@ struct HomePage: View {
     @State var favEventDate = ""
     var emptyMyEvent = "You have no upcoming events from My Events."
     var emptyFavEvent = "You have no upcoming events from Favorited Events."
-    
+
     var dateFormat = DateFormatter()
     var timeFormat = DateFormatter()
 
@@ -76,13 +75,13 @@ struct HomePage: View {
                     .foregroundColor(.white)
                     .font(.title)
                     .shadow(radius: 5)
-                
+
                 if user.myEvents.count > 0 {
                     EventView(text: myEventLabel, address: myEventAddress, date: myEventDate)
                 } else {
                     EventView(text: emptyMyEvent, address: "", date: "")
                 }
-                
+
                 if user.favoritedEvents.count > 0 {
                     EventView(text: favEventLabel, address: favEventAddress, date: favEventDate)
                 } else {
@@ -119,7 +118,6 @@ struct EventView: View {
         self.address = address
         self.date = date
         self.desc = "\(address) | \(date)"
-        
     }
 
     var body: some View {

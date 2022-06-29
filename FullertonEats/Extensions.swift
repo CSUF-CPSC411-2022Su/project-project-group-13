@@ -48,5 +48,3 @@ extension View {
         modifier(HiddenNavigationBar())
     }
 }
-
-

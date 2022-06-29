@@ -53,7 +53,7 @@ struct HomePageEventModifier: ViewModifier {
     }
 }
 
-//Jiu Lin' struct
+// Jiu Lin' struct
 struct TextEntry: ViewModifier {
     func body(content: Content) -> some View {
         content
