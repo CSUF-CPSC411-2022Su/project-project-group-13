@@ -182,6 +182,7 @@ struct AddEventSheet: View {
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
     @State var showErrorMessage: Bool = false
+    var loader = UserLoader()
     
     @Environment(\.dismiss) var dismiss
     
@@ -263,6 +264,7 @@ struct AddEventSheet: View {
                 let newEvent = Event(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
 
                 user.myEvents.append(newEvent)
+                loader.saveUser(user: user)
                 dismiss()
             } else {
                 showErrorMessage.toggle()
@@ -283,6 +285,7 @@ struct EditEventSheet: View {
     @State var startTime: Date = .init()
     @State var endTime: Date = .init()
     @State var showErrorMessage: Bool = false
+    var loader = UserLoader()
     
     @Environment(\.dismiss) var dismiss
     
@@ -381,6 +384,7 @@ struct EditEventSheet: View {
             if !label.isEmpty, !address.isEmpty {
                 user.myEvents[index].update(label: label, desc: desc, address: address, date: date, startTime: startTime, endTime: endTime)
                 
+                loader.saveUser(user: user)
                 dismiss()
             } else {
                 showErrorMessage.toggle()
