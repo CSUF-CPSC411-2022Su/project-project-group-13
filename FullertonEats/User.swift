@@ -19,6 +19,11 @@ class User: ObservableObject, Codable {
     
     init() {}
     
+    init(username: String, password: String) {
+        self.username = username
+        self.password = password
+    }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

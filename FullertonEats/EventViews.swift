@@ -148,11 +148,11 @@ struct FavoritedEventsView: View {
     // Adds sample favorited events
     var sampleButton: some View {
         Button("Sample") {
-            user.favoritedEvents.append(Event(label: "Bread and Water", desc: "All types of bread and water", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+            user.favoritedEvents.append(Event(label: "Test Label", desc: "Test Desc", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
             
-            user.favoritedEvents.append(Event(label: "Soup", desc: "Tomato and chicken noodle soup!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+            user.favoritedEvents.append(Event(label: "Test Label 2", desc: "Test Desc 2", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
             
-            user.favoritedEvents.append(Event(label: "Fruits", desc: "All types of fruit served here!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+            user.favoritedEvents.append(Event(label: "Test Label 3", desc: "Test Desc 3", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
             
             loader.saveUser(user: user)
         }
