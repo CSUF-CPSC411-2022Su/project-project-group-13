@@ -28,24 +28,6 @@ class User: ObservableObject, Codable {
         myEvents = try container.decode([Event].self, forKey: .myEvents)
     }
     
-    // sample init
-    init(username: String, password: String) {
-        self.username = username
-        self.password = password
-    
-//        myEvents.append(Event(label: "Hot Dogs", desc: "Free hot dogs! With condiments.", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-//
-//        myEvents.append(Event(label: "Burgers", desc: "Vegan burgers!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-//
-//        myEvents.append(Event(label: "Tacos", desc: "Beef or chicken!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-        
-        favoritedEvents.append(Event(label: "Bread and Water", desc: "All types of bread and water", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-        
-        favoritedEvents.append(Event(label: "Soup", desc: "Tomato and chicken noodle soup!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-        
-        favoritedEvents.append(Event(label: "Fruits", desc: "All types of fruit served here!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-    }
-    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
