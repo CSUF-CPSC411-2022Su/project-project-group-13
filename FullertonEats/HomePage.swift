@@ -72,6 +72,7 @@ struct HomePage: View {
 
             VStack(alignment: .leading) {
                 Text("Upcoming Events")
+                    .padding()
                     .foregroundColor(.white)
                     .font(.largeTitle)
                     .shadow(radius: 5)

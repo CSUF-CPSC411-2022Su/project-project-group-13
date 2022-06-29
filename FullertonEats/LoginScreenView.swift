@@ -47,6 +47,7 @@ struct LoginScreenView: View {
                     NavigationLink(destination: Navigator(user: user), isActive: $isLoginSucessful) {
                         EmptyView()
                     }
+                    .padding(.vertical, 5)
                 
                     Button("Login") {
                         if !username.isEmpty, !password.isEmpty {
