@@ -8,17 +8,19 @@
 import Foundation
 import SwiftUI
 
+// Storing features info from API
 struct MapsAPIData: Codable {
     var features: [FoodLocactionInfo]
 }
 
+// A part of feature's attributes
 struct FoodLocactionInfo: Codable, Hashable { // Parts of the JSON decode feature's varibles
     var place_name: String
     var center: [Double] // long and lat
 }
 
 // TODO: Provide property to store the JSON's center key/value pair *
-
+// Decoding JSON file to get place_name (& Location image)
 class FoodFinder: ObservableObject {
     @Published var firstFoundName = ""
     @Published var image = UIImage()
