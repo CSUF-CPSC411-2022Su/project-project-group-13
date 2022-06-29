@@ -65,28 +65,28 @@ class User: ObservableObject, Codable {
         self.myEvents = loadedUser.myEvents
     }
     
-    // returns the index of the upcoming event from favoritedEvents
-    func getUpcomingFavoriteEvent() -> Int? {
+    // returns the upcoming event from favoritedEvents
+    func getUpcomingFavoriteEvent() -> Event? {
         if favoritedEvents.count == 0 {
             return nil
         } else if favoritedEvents.count == 1 {
-            return 1
+            return favoritedEvents[0]
         }
         return getUpcoming(eventArr: favoritedEvents)
     }
     
-    // returns the index of the upcoming event from myEvents
-    func getUpcomingMyEvent() -> Int? {
+    // returns the upcoming event from myEvents
+    func getUpcomingMyEvent() -> Event? {
         if myEvents.count == 0 {
             return nil
         } else if myEvents.count == 1 {
-            return 1
+            return myEvents[0]
         }
         return getUpcoming(eventArr: myEvents)
     }
     
-    // Helper function, returns the index of the upcoming event from an Event array
-    private func getUpcoming(eventArr: [Event]) -> Int {
+    // Helper function, returns the upcoming event from an Event array
+    private func getUpcoming(eventArr: [Event]) -> Event {
         var upcomingIndex = 0
         var min = 0.0
         
@@ -99,7 +99,7 @@ class User: ObservableObject, Codable {
                 upcomingIndex = i
             }
         }
-        return upcomingIndex
+        return eventArr[upcomingIndex]
     }
 }
 

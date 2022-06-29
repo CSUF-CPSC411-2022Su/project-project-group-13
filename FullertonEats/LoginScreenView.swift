@@ -11,10 +11,10 @@ import SwiftUI
 struct LoginScreenView: View {
     @SceneStorage("username") var username = ""
     @SceneStorage("password") var password = ""
-    @StateObject var user = User()
-    @State var showingLoginSuccess = false
     @State var showingErrorMessage = false
     @State var errorMessage = ""
+    @State var isLoginSucessful = false
+    @StateObject var user = User()
     
     var userLoader = UserLoader()
     
@@ -43,16 +43,16 @@ struct LoginScreenView: View {
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
+                    
+                    NavigationLink(destination: Navigator(user: user), isActive: $isLoginSucessful) {
+                        EmptyView()
+                    }
                 
                     Button("Login") {
-                        // loading decodedUser to user
-                        if let loadedUser = userLoader.loadUser() {
-                            user.assign(loadedUser)
-                        }
-                        
-                        if !username.isEmpty, !password.isEmpty {
-                            if user.username == username, user.password == password {
-                                showingLoginSuccess.toggle()
+                        if !username.isEmpty, !password.isEmpty, let loadedUser = userLoader.loadUser() {
+                            if loadedUser.username == username, loadedUser.password == password {
+                                isLoginSucessful = true
+                                user.assign(loadedUser)
                             } else {
                                 showingErrorMessage.toggle()
                                 errorMessage = "Incorrect username or password!"
@@ -62,6 +62,7 @@ struct LoginScreenView: View {
                             errorMessage = "Username or password is empty!"
                         }
                     }
+                    .padding()
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
@@ -75,41 +76,10 @@ struct LoginScreenView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
                 }
-                LoginSuccess(login: $showingLoginSuccess)
                 LoginError(isActive: $showingErrorMessage, errorMessage: $errorMessage)
             }
         }
-        .environmentObject(user)
         .hiddenNavigationBarStyle()
-    }
-}
-    
-struct LoginSuccess: View {
-    @Binding var login: Bool
-    var body: some View {
-        ZStack {
-            if login {
-                VStack(spacing: 0) {
-                    Text("Success!")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 100, alignment: .center)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-
-                    NavigationLink(destination: Navigator()) {
-                        Text("Homepage")
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50, alignment: .center)
-                            .foregroundColor(.white)
-                    }
-                    .background(Color.CSUFBlue())
-                }
-                .frame(maxWidth: 300)
-                .background(.white)
-                .cornerRadius(10)
-                .shadow(radius: 5)
-            }
-        }
     }
 }
 
