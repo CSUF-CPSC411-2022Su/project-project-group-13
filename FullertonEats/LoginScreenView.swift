@@ -12,17 +12,11 @@ struct LoginScreenView: View {
     @SceneStorage("username") var username = ""
     @SceneStorage("password") var password = ""
     @StateObject var user = User()
-    @State var loginNotify: Bool = false
-    var userLoader = UserLoader()
+    @State var showingLoginSuccess = false
+    @State var showingErrorMessage = false
+    @State var errorMessage = ""
     
-    init() {
-        if let loaderUser = userLoader.loadUser() {
-            user.username = loaderUser.username
-            user.password = loaderUser.password
-            user.favoritedEvents = loaderUser.favoritedEvents
-            user.myEvents = loaderUser.myEvents
-        }
-    }
+    var userLoader = UserLoader()
     
     var body: some View {
         NavigationView {
@@ -50,41 +44,98 @@ struct LoginScreenView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                 
-                    Button("login") {
-                        if user.username==username, user.password==password {
-                            loginNotify.toggle()
+                    Button("Login") {
+                        // loading decodedUser to user
+                        if let loadedUser = userLoader.loadUser() {
+                            user.assign(loadedUser)
+                        }
+                        
+                        if !username.isEmpty, !password.isEmpty {
+                            if user.username == username, user.password == password {
+                                showingLoginSuccess.toggle()
+                            } else {
+                                showingErrorMessage.toggle()
+                                errorMessage = "Incorrect username or password!"
+                            }
+                        } else {
+                            showingErrorMessage.toggle()
+                            errorMessage = "Username or password is empty!"
                         }
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
                     .background(Color.blue)
                     .cornerRadius(10)
+                
+                    NavigationLink(destination: SignUpView()) {
+                        Text("Sign Up")
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 50)
+                    .background(Color.blue)
+                    .cornerRadius(10)
                 }
-                Login_Notify(login: $loginNotify)
+                LoginSuccess(login: $showingLoginSuccess)
+                LoginError(isActive: $showingErrorMessage, errorMessage: $errorMessage)
             }
         }
-        .navigationBarHidden(true)
+        .environmentObject(user)
+        .hiddenNavigationBarStyle()
     }
 }
     
-struct Login_Notify: View {
+struct LoginSuccess: View {
     @Binding var login: Bool
     var body: some View {
         ZStack {
             if login {
                 VStack(spacing: 0) {
-                    Text("Success")
+                    Text("Success!")
                         .frame(maxWidth: .infinity)
                         .frame(height: 100, alignment: .center)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
 
-                    NavigationLink(destination: HomePage()) {
+                    NavigationLink(destination: Navigator()) {
                         Text("Homepage")
                             .frame(maxWidth: .infinity)
                             .frame(height: 50, alignment: .center)
                             .foregroundColor(.white)
                     }
+                    .background(Color.CSUFBlue())
+                }
+                .frame(maxWidth: 300)
+                .background(.white)
+                .cornerRadius(10)
+                .shadow(radius: 5)
+            }
+        }
+    }
+}
+
+// Created by Eric Chu
+struct LoginError: View {
+    @Binding var isActive: Bool
+    @Binding var errorMessage: String
+    
+    var body: some View {
+        ZStack {
+            if isActive {
+                VStack(spacing: 0) {
+                    Text(errorMessage)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 100, alignment: .center)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+
+                    Button(action: {
+                        isActive = false
+                    }) {
+                        Text("Ok")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50, alignment: .center)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                     .background(Color.CSUFBlue())
                 }
                 .frame(maxWidth: 300)

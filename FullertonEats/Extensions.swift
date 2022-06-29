@@ -43,5 +43,10 @@ extension Event: Hashable {
     }
 }
 
+extension View {
+    func hiddenNavigationBarStyle() -> some View {
+        modifier(HiddenNavigationBar())
+    }
+}
 
 

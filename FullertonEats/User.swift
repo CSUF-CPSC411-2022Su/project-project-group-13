@@ -13,15 +13,12 @@ class User: ObservableObject, Codable {
         case username, password, favoritedEvents, myEvents
     }
     
-    var username: String
-    var password: String
+    var username: String = ""
+    var password: String = ""
     @Published var favoritedEvents: [Event] = []
     @Published var myEvents: [Event] = []
     
-    init() {
-        self.username = ""
-        self.password = ""
-    }
+    init() {    }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -32,15 +29,16 @@ class User: ObservableObject, Codable {
         myEvents = try container.decode([Event].self, forKey: .myEvents)
     }
     
+    // sample init
     init(username: String, password: String) {
         self.username = username
         self.password = password
     
-        myEvents.append(Event(label: "Hot Dogs", desc: "Free hot dogs! With condiments.", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-        
-        myEvents.append(Event(label: "Burgers", desc: "Vegan burgers!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
-        
-        myEvents.append(Event(label: "Tacos", desc: "Beef or chicken!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+//        myEvents.append(Event(label: "Hot Dogs", desc: "Free hot dogs! With condiments.", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+//        
+//        myEvents.append(Event(label: "Burgers", desc: "Vegan burgers!", address: "Gymnasium Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
+//        
+//        myEvents.append(Event(label: "Tacos", desc: "Beef or chicken!", address: "Engineering and Computer Science Buildings, Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
         favoritedEvents.append(Event(label: "Bread and Water", desc: "All types of bread and water", address: "Campus Dr. Fullerton, CA 92831", date: Date(), startTime: Date(), endTime: Date()))
         
@@ -57,6 +55,14 @@ class User: ObservableObject, Codable {
         try container.encode(password, forKey: .password)
         try container.encode(favoritedEvents, forKey: .favoritedEvents)
         try container.encode(myEvents, forKey: .myEvents)
+    }
+    
+    // assign a loaded user to this user
+    func assign(_ loadedUser: User) {
+        self.username = loadedUser.username
+        self.password = loadedUser.password
+        self.favoritedEvents = loadedUser.favoritedEvents
+        self.myEvents = loadedUser.myEvents
     }
     
     // returns the index of the upcoming event from favoritedEvents
@@ -95,26 +101,19 @@ class User: ObservableObject, Codable {
         }
         return upcomingIndex
     }
-    
-    func assignUser(user: User) {
-        self.username = user.username
-        self.password = user.password
-        self.favoritedEvents = user.favoritedEvents
-        self.myEvents = user.myEvents
-    }
-    
 }
 
-struct UserLoader {
+class UserLoader {
     var userInfoURL: URL
+    
     
     init() {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         userInfoURL = documentDirectory.appendingPathComponent("userInfo").appendingPathExtension("plist")
     }
     
-    // call this function on successful login
-    func loadUser() -> User? {
+    // call this function to load user
+    func loadUser() -> User?{
         let propertyListDecoder = PropertyListDecoder()
         if let retrieveUser = try? Data(contentsOf: userInfoURL), let decodedUser = try? propertyListDecoder.decode(User.self, from: retrieveUser) {
             return decodedUser
