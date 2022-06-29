@@ -3,24 +3,26 @@
 //  FullertonEats
 //
 //  Created by csuftitan on 6/26/22.
-//  Edit by Jiu Lin on 6/26/22
+//
 
 import Foundation
 import SwiftUI
 
-struct MapsAPIResult: Codable {
-    var features: [FoodLocation]
+struct MapsAPIData: Codable {
+    var features: [FoodLocactionInfo]
 }
 
-struct FoodLocation: Codable {
+struct FoodLocactionInfo: Codable, Hashable { // Parts of the JSON decode feature's varibles
     var place_name: String
-    // TODO: Provide property to store the JSON's center key/value pair *
     var center: [Double] // long and lat
 }
+
+// TODO: Provide property to store the JSON's center key/value pair *
 
 class FoodFinder: ObservableObject {
     @Published var firstFoundName = ""
     @Published var image = UIImage()
+    @Published var arr: [FoodLocactionInfo] = []
 
     private var accessToken = "pk.eyJ1IjoicGludmVudGFkbyIsImEiOiJjbDFreTYwZWwwNWY3M2JvZm1ieDNpOGVsIn0._iXvNRhRLnJEYoLGzzY5IQ"
 
@@ -46,51 +48,29 @@ class FoodFinder: ObservableObject {
                 DispatchQueue.main.async {
                     let jsonDecoder = JSONDecoder()
                     // Decode the JSON and store in result
-                    if let validData = data, let result = try? jsonDecoder.decode(MapsAPIResult.self, from: validData) {
+                    if let validData = data, let result = try? jsonDecoder.decode(MapsAPIData.self, from: validData) {
                         if result.features.count > 0 {
-                            self.firstFoundName = result.features[0].place_name
+                            self.arr = result.features
+                            // assign FoodLocactionInfo array, features is the object of FoodLocactionInfo
 
                             // TODO: Retrieve the first value in the center property and store in long
                             // let long = 0.0 // Replace 0.0 with code
-                            let long = result.features[0].center[0]
+                            let long = result.features[1].center[0]
 
                             // TODO: Retrieve the second value in the center property and store in lat *
                             // let lat = 0.0 // Replace 0.0 with code
-                            let lat = result.features[0].center[1]
+                            let lat = result.features[1].center[1]
 
-                            self.loadMapImage(long: long, lat: lat)
+                            // self.loadMapImage(long: long, lat: lat)
                         } else {
-                            self.firstFoundName = "No results found"
+                            self.firstFoundName = "Inner no results found"
                         }
                     } else {
                         self.firstFoundName = "No results found"
                     }
                 }
             }
-            // Runs the task (open the URL)
-            task.resume()
-        }
-    }
-
-    func loadMapImage(long: Double, lat: Double) {
-        let zoom = 15
-        let rotation = 0
-        let mapboxImageURL = "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/\(long),\(lat),\(zoom),\(rotation)/300x200?access_token=\(accessToken)"
-
-        if let url = URL(string: mapboxImageURL) {
-            let task = URLSession.shared.dataTask(with: url) {
-                data, _, _ in
-
-                DispatchQueue.main.async {
-                    if let validData = data, let result = UIImage(data: validData) {
-                        self.image = result
-                    } else {
-                        self.firstFoundName = "No results found"
-                    }
-                }
-            }
-            task.resume()
+            task.resume() // Runs the task (open the URL)
         }
     }
 }
-
